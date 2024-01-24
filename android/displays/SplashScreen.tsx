@@ -8,10 +8,11 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import {Scene} from '../../App';
 
 const {width, height} = Dimensions.get('window'); // Get the window dimensions
 
-const SplashScreen = () => {
+const SplashScreen = ({setScene}: {setScene: (scene: Scene) => void}) => {
   return (
     <ImageBackground
       source={{
@@ -26,10 +27,14 @@ const SplashScreen = () => {
           style={styles.logo}
         />
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setScene(Scene.GAMEBOARD)}>
           <Text style={styles.buttonText}>Play</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setScene(Scene.GAMEBOARD)}>
           <Text style={styles.buttonText}>Practice</Text>
         </TouchableOpacity>
       </View>

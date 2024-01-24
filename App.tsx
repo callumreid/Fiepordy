@@ -10,6 +10,7 @@ export default function App() {
 
   return (
     <>
+      {scene === Scene.SPLASHSCREEN && <SplashScreen />}
       {scene === Scene.GAMEBOARD && <GameBoard />}
       {scene === Scene.QUESTION && <Question />}
       {scene === Scene.FINALJEOPARDY && <FinalJeopardy />}
