@@ -15,7 +15,7 @@ export default function App() {
   return (
     <>
       {scene === Scene.GAMEBOARD && <GameBoard setScene={setScene} />}
-      {scene === Scene.QUESTION && <Question />}
+      {scene === Scene.QUESTION && <Question setScene={setScene} />}
       {scene === Scene.FINALJEOPARDY && <FinalJeopardy />}
     </>
   );

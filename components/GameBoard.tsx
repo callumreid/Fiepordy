@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Podium from './Podium';
-import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
+import Animated, {FadeOut} from 'react-native-reanimated';
 import {Scene} from '../App';
 
 const categories = [
@@ -20,20 +20,15 @@ const categories = [
 
 const values = [200, 400, 800];
 
-function GameBoard({setScene}: {setScene: any}) {
-  // Handle question selection (for example purposes, this is just a placeholder)
+function GameBoard({setScene}: {setScene: (scene: Scene) => void}) {
   const selectQuestion = (category: string, value: number) => {
     console.log(`Selected ${category} for $${value}`);
     setScene(Scene.QUESTION);
-    // Here, you would navigate to the Question component with the selected category and value
   };
 
   return (
-    <Animated.View style={styles.container} entering={FadeIn} exiting={FadeOut}>
-      {/* Game board header */}
+    <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
       <Text style={styles.gameBoardTitle}>Jeopardy</Text>
-
-      {/* Categories and values */}
       <ScrollView>
         <View style={styles.categoriesContainer}>
           {categories.map(category => (
@@ -58,7 +53,6 @@ function GameBoard({setScene}: {setScene: any}) {
         </View>
       </ScrollView>
 
-      {/* Podiums */}
       <View style={styles.podiumContainer}>
         <Podium name="Freddie" score={0} />
         <Podium name="You" score={0} isCurrentUser={true} />
@@ -70,13 +64,13 @@ function GameBoard({setScene}: {setScene: any}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f0f23', // Adjust the background color to match the Jeopardy blue
-    paddingVertical: 20, // Add some padding at the top and bottom
+    backgroundColor: '#0f0f23',
+    paddingVertical: 20,
   },
   categoriesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 10, // Space between categories and values
+    marginBottom: 10,
   },
   categoryTitle: {
     color: 'white',
@@ -84,9 +78,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     flex: 1,
     textAlign: 'center',
-    paddingVertical: 10, // Vertical padding for the titles
-    backgroundColor: '#1c3f94', // Category title background color
-    marginHorizontal: 2, // Adjust as needed for spacing between titles
+    paddingVertical: 10,
+    backgroundColor: '#1c3f94',
+    marginHorizontal: 2,
   },
   valuesContainer: {
     // No specific styles needed here yet
@@ -94,15 +88,15 @@ const styles = StyleSheet.create({
   valueRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 10, // Space between each value row
+    marginBottom: 10,
   },
   valueBox: {
-    backgroundColor: '#1c3f94', // Value box background color
-    paddingVertical: 20, // Vertical padding for the value boxes
+    backgroundColor: '#1c3f94',
+    paddingVertical: 20,
     flex: 1,
-    marginHorizontal: 2, // Adjust as needed for spacing between boxes
-    alignItems: 'center', // Center the dollar value horizontally
-    justifyContent: 'center', // Center the dollar value vertically
+    marginHorizontal: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   valueText: {
     color: 'white',
@@ -113,8 +107,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
-    paddingVertical: 10, // Add padding for spacing from the bottom edge
-    backgroundColor: 'transparent', // To match the background
+    paddingVertical: 10,
+    backgroundColor: 'transparent',
   },
   gameBoardTitle: {
     color: 'white',

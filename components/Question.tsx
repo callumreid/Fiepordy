@@ -1,15 +1,17 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
-import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
+import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import Animated, {FadeOut} from 'react-native-reanimated';
+import {Scene} from '../App';
 
-type QuestionProps = {
-  // Props for category, value, and the actual question
-};
-
-const Question: React.FC<QuestionProps> = () => {
+const Question = ({setScene}: {setScene: (scene: Scene) => void}) => {
   return (
-    <Animated.View style={styles.container} entering={FadeIn} exiting={FadeOut}>
-      <Text style={styles.question}>Question Question :D!</Text>
+    <Animated.View
+      style={styles.container}
+      exiting={FadeOut.duration(500)}
+      onPointerDown={() => setScene(Scene.GAMEBOARD)}>
+      <TouchableOpacity onPress={() => setScene(Scene.GAMEBOARD)}>
+        <Text style={styles.question}>Question Question :D!</Text>
+      </TouchableOpacity>
     </Animated.View>
   );
 };
