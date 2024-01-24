@@ -1,4 +1,3 @@
-// components/GameBoard.tsx
 import React from 'react';
 import {
   View,
@@ -9,7 +8,9 @@ import {
 } from 'react-native';
 import Podium from './Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
-import {Scene} from '../App';
+import {Scene} from '../types/scenes';
+import {sceneAtom} from '../atoms/atoms';
+import {useAtom} from 'jotai';
 
 const categories = [
   'Myths & Legends',
@@ -20,7 +21,9 @@ const categories = [
 
 const values = [200, 400, 800];
 
-function GameBoard({setScene}: {setScene: (scene: Scene) => void}) {
+function GameBoard() {
+  const [, setScene] = useAtom(sceneAtom);
+
   const selectQuestion = (category: string, value: number) => {
     console.log(`Selected ${category} for $${value}`);
     setScene(Scene.QUESTION);

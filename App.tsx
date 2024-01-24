@@ -1,21 +1,17 @@
-import React, {useState} from 'react';
 import GameBoard from './components/GameBoard';
 import FinalJeopardy from './components/FinalJeopardy';
 import Question from './components/Question';
-
-export enum Scene {
-  GAMEBOARD,
-  QUESTION,
-  FINALJEOPARDY,
-}
+import {Scene} from './types/scenes';
+import {useAtom} from 'jotai';
+import {sceneAtom} from './atoms/atoms';
 
 export default function App() {
-  const [scene, setScene] = useState<Scene>(Scene.GAMEBOARD);
+  const [scene] = useAtom(sceneAtom);
 
   return (
     <>
-      {scene === Scene.GAMEBOARD && <GameBoard setScene={setScene} />}
-      {scene === Scene.QUESTION && <Question setScene={setScene} />}
+      {scene === Scene.GAMEBOARD && <GameBoard />}
+      {scene === Scene.QUESTION && <Question />}
       {scene === Scene.FINALJEOPARDY && <FinalJeopardy />}
     </>
   );
