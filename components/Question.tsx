@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
+import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
 
 type QuestionProps = {
   // Props for category, value, and the actual question
@@ -7,16 +8,23 @@ type QuestionProps = {
 
 const Question: React.FC<QuestionProps> = () => {
   return (
-    <View style={styles.container}>
-      <Text>Question for the selected category and value</Text>
-      {/* Add more UI elements as needed */}
-    </View>
+    <Animated.View style={styles.container} entering={FadeIn} exiting={FadeOut}>
+      <Text style={styles.question}>Question Question :D!</Text>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    // Styles for your question container
+    flex: 1,
+    backgroundColor: '#1c3f94',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  question: {
+    color: 'white',
+    fontSize: 34,
+    fontWeight: 'bold',
   },
 });
 

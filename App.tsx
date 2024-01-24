@@ -1,25 +1,22 @@
-import React from 'react';
-import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, {useState} from 'react';
 import GameBoard from './components/GameBoard';
 import FinalJeopardy from './components/FinalJeopardy';
 import Question from './components/Question';
 
-const Stack = createStackNavigator();
+export enum Scene {
+  GAMEBOARD,
+  QUESTION,
+  FINALJEOPARDY,
+}
 
 export default function App() {
+  const [scene, setScene] = useState<Scene>(Scene.GAMEBOARD);
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="GameBoard">
-        <Stack.Screen
-          name="Gameboard"
-          component={GameBoard}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="Question" component={Question} />
-        <Stack.Screen name="FinalJeopardy" component={FinalJeopardy} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      {scene === Scene.GAMEBOARD && <GameBoard setScene={setScene} />}
+      {scene === Scene.QUESTION && <Question />}
+      {scene === Scene.FINALJEOPARDY && <FinalJeopardy />}
+    </>
   );
 }

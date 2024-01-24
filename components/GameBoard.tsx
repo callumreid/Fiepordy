@@ -8,6 +8,8 @@ import {
   ScrollView,
 } from 'react-native';
 import Podium from './Podium';
+import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
+import {Scene} from '../App';
 
 const categories = [
   'Myths & Legends',
@@ -18,15 +20,16 @@ const categories = [
 
 const values = [200, 400, 800];
 
-const GameBoard = () => {
+function GameBoard({setScene}: {setScene: any}) {
   // Handle question selection (for example purposes, this is just a placeholder)
   const selectQuestion = (category: string, value: number) => {
     console.log(`Selected ${category} for $${value}`);
+    setScene(Scene.QUESTION);
     // Here, you would navigate to the Question component with the selected category and value
   };
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={styles.container} entering={FadeIn} exiting={FadeOut}>
       {/* Game board header */}
       <Text style={styles.gameBoardTitle}>Jeopardy</Text>
 
@@ -61,9 +64,9 @@ const GameBoard = () => {
         <Podium name="You" score={0} isCurrentUser={true} />
         <Podium name="Eric" score={0} />
       </View>
-    </View>
+    </Animated.View>
   );
-};
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
