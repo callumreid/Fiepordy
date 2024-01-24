@@ -1,6 +1,6 @@
 // components/Podium.tsx
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 
 type PodiumProps = {
   name: string;
@@ -8,15 +8,19 @@ type PodiumProps = {
   isCurrentUser?: boolean;
 };
 
-const Podium: React.FC<PodiumProps> = ({
-  name,
-  score,
-  isCurrentUser = false,
-}) => {
+const Podium: React.FC<PodiumProps> = ({name, score}) => {
   return (
-    <View style={[styles.container, isCurrentUser && styles.currentUser]}>
-      <Text style={styles.score}>${score}</Text>
-      <Text style={styles.name}>{name}</Text>
+    // <View style={[styles.container, isCurrentUser && styles.currentUser]}>
+    //   <Text style={styles.score}>${score}</Text>
+    //   <Text style={styles.name}>{name}</Text>
+    // </View>
+    <View style={styles.container}>
+      <Image
+        source={{
+          uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.spPodium.png',
+        }}
+        style={styles.podium}
+      />
     </View>
   );
 };
@@ -30,9 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 5,
   },
-  currentUser: {
-    backgroundColor: '#FFA500', // Orange color for the current user
-  },
+
   score: {
     color: '#FFF',
     fontSize: 24,
@@ -41,6 +43,12 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 20,
     marginTop: 5,
+  },
+  podium: {
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+    marginBottom: -30,
   },
 });
 
