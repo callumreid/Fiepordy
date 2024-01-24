@@ -1,4 +1,5 @@
 export enum Scene {
+  SPLASHSCREEN,
   GAMEBOARD,
   QUESTION,
   FINALJEOPARDY,
