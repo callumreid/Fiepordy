@@ -8,11 +8,15 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
-import {Scene} from '../../App';
+import {sceneAtom} from '../../atoms/atoms';
+import {useAtom} from 'jotai';
+import {Scene} from '../../types/scenes';
 
 const {width, height} = Dimensions.get('window'); // Get the window dimensions
 
-const SplashScreen = ({setScene}: {setScene: (scene: Scene) => void}) => {
+const SplashScreen = () => {
+  const [, setScene] = useAtom(sceneAtom);
+
   return (
     <ImageBackground
       source={{
