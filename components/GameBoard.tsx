@@ -39,7 +39,7 @@ function GameBoard() {
         }}
         style={styles.fullscreen}
       />
-      <ScrollView>
+      <View style={styles.gameBoard}>
         <View style={styles.categoriesContainer}>
           {categories.map(category => (
             <Text key={category} style={styles.categoryTitle}>
@@ -61,8 +61,7 @@ function GameBoard() {
             </View>
           ))}
         </View>
-      </ScrollView>
-
+      </View>
       <View style={styles.podiumContainer}>
         <Podium name="You" score={0} isCurrentUser={true} />
       </View>
@@ -79,10 +78,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  gameBoard: {
+    backgroundColor: 'black',
+    maxWidth: 600,
+    alignSelf: 'center',
+    maxHeight: 300,
+    marginBottom: 165,
+  },
   categoriesContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginBottom: 5,
+    width: '100%',
   },
   categoryTitle: {
     color: 'white',
@@ -94,6 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1b199c',
     marginHorizontal: 2,
     maxWidth: 145,
+    maxHeight: 80,
   },
   valuesContainer: {
     marginBottom: 100,
@@ -111,10 +119,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     maxWidth: 145,
+    maxHeight: 80,
   },
   valueText: {
-    color: 'white',
-    fontSize: 18,
+    color: '#EABD5E',
+    fontSize: 38,
     fontWeight: 'bold',
   },
   podiumContainer: {
