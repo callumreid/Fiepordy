@@ -13,7 +13,7 @@ const Podium: React.FC<PodiumProps> = () => {
     <View style={styles.container}>
       <Image
         source={{
-          uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.spPodium.png',
+          uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.podiumWithYou.png',
         }}
         style={styles.podium}
       />
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-    backgroundColor: '#000080', // Navy blue
     borderRadius: 5,
     margin: 5,
   },
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     resizeMode: 'contain',
-    marginBottom: -30,
+    marginBottom: -40,
   },
 });
 
