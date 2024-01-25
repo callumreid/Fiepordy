@@ -5,6 +5,7 @@ import Question from './components/Question';
 import {Scene} from './types/scenes';
 import {useAtom} from 'jotai';
 import {sceneAtom} from './atoms/atoms';
+import GameModeSelection from './android/displays/GameModeSelection';
 import SplashScreen from './android/displays/SplashScreen';
 
 export default function App() {
@@ -12,10 +13,11 @@ export default function App() {
 
   return (
     <>
-      {scene === Scene.SPLASHSCREEN && <SplashScreen />}
-      {scene === Scene.GAMEBOARD && <GameBoard />}
+      {scene === Scene.SPLASH_SCREEN && <SplashScreen />}
+      {scene === Scene.GAME_MODE_SELECTION && <GameModeSelection />}
+      {scene === Scene.GAME_BOARD && <GameBoard />}
       {scene === Scene.QUESTION && <Question />}
-      {scene === Scene.FINALJEOPARDY && <FinalJeopardy />}
+      {scene === Scene.FINAL_JEOPARDY && <FinalJeopardy />}
     </>
   );
 }
