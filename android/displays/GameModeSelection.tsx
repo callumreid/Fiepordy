@@ -12,7 +12,7 @@ import {sceneAtom} from '../../atoms/atoms';
 import {useAtom} from 'jotai';
 import {Scene} from '../../types/scenes';
 
-const {width, height} = Dimensions.get('window'); // Get the window dimensions
+const {width, height} = Dimensions.get('window');
 
 const GameModeSelection = () => {
   const [, setScene] = useAtom(sceneAtom);

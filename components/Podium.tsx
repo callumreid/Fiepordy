@@ -8,12 +8,8 @@ type PodiumProps = {
   isCurrentUser?: boolean;
 };
 
-const Podium: React.FC<PodiumProps> = ({name, score}) => {
+const Podium: React.FC<PodiumProps> = () => {
   return (
-    // <View style={[styles.container, isCurrentUser && styles.currentUser]}>
-    //   <Text style={styles.score}>${score}</Text>
-    //   <Text style={styles.name}>{name}</Text>
-    // </View>
     <View style={styles.container}>
       <Image
         source={{

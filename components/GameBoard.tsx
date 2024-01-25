@@ -5,6 +5,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
+  ImageBackground,
 } from 'react-native';
 import Podium from './Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
@@ -20,7 +22,7 @@ const categories = [
 ];
 
 const values = [200, 400, 800];
-
+const {width, height} = Dimensions.get('window');
 function GameBoard() {
   const [, setScene] = useAtom(sceneAtom);
 
@@ -31,7 +33,12 @@ function GameBoard() {
 
   return (
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
-      <Text style={styles.gameBoardTitle}>Jeopardy</Text>
+      <ImageBackground
+        source={{
+          uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.stageBGBlue.png',
+        }}
+        style={styles.fullscreen}
+      />
       <ScrollView>
         <View style={styles.categoriesContainer}>
           {categories.map(category => (
@@ -57,49 +64,53 @@ function GameBoard() {
       </ScrollView>
 
       <View style={styles.podiumContainer}>
-        <Podium name="Freddie" score={0} />
         <Podium name="You" score={0} isCurrentUser={true} />
-        <Podium name="Eric" score={0} />
       </View>
+      <ImageBackground />
     </Animated.View>
   );
 }
 const styles = StyleSheet.create({
+  fullscreen: {
+    flex: 1,
+    width: width,
+    height: height,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#0f0f23',
-    paddingVertical: 20,
   },
   categoriesContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 10,
+    justifyContent: 'center',
+    marginBottom: 5,
   },
   categoryTitle: {
     color: 'white',
-    fontSize: 22,
+    fontSize: 14,
     fontWeight: 'bold',
     flex: 1,
     textAlign: 'center',
-    paddingVertical: 10,
-    backgroundColor: '#1c3f94',
+    paddingVertical: 20,
+    backgroundColor: '#1b199c',
     marginHorizontal: 2,
+    maxWidth: 145,
   },
   valuesContainer: {
-    // No specific styles needed here yet
+    marginBottom: 100,
   },
   valueRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 10,
+    justifyContent: 'center',
+    marginBottom: 5,
   },
   valueBox: {
-    backgroundColor: '#1c3f94',
+    backgroundColor: '#1b199c',
     paddingVertical: 20,
     flex: 1,
     marginHorizontal: 2,
     alignItems: 'center',
     justifyContent: 'center',
+    maxWidth: 145,
   },
   valueText: {
     color: 'white',
@@ -107,19 +118,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   podiumContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
-    paddingVertical: 10,
-    backgroundColor: 'transparent',
-  },
-  gameBoardTitle: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: 10,
-    backgroundColor: 'black',
   },
 });
 
