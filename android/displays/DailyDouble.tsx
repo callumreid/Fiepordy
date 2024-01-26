@@ -14,7 +14,7 @@ type DoubleJeopardyProps = {
 };
 const {width, height} = Dimensions.get('window');
 
-const DoubleJeopardy: React.FC<DoubleJeopardyProps> = () => {
+const DailyDouble: React.FC<DoubleJeopardyProps> = () => {
   const [, setScene] = useAtom(sceneAtom);
   return (
     <View style={styles.container}>
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DoubleJeopardy;
+export default DailyDouble;
