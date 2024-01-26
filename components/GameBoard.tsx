@@ -13,6 +13,7 @@ import {Scene} from '../types/scenes';
 import {
   sceneAtom,
   selectedCategoryAtom,
+  selectedQuestionsAtom,
   selectedValueAtom,
 } from '../atoms/atoms';
 import {useAtom} from 'jotai';
@@ -30,11 +31,17 @@ function GameBoard() {
   const [, setScene] = useAtom(sceneAtom);
   const [, setSelectedCategory] = useAtom(selectedCategoryAtom);
   const [, setSelectedValue] = useAtom(selectedValueAtom);
-
+  const [selectedQuestions, setSelectedQuestions] = useAtom(
+    selectedQuestionsAtom,
+  );
   const selectQuestion = (category: string, value: number) => {
     console.log(`Selected ${category} for $${value}`);
     setSelectedCategory(category);
     setSelectedValue(value);
+    setSelectedQuestions(prev => ({
+      ...prev,
+      [`${category}-${value}`]: true,
+    }));
     setScene(Scene.QUESTION);
   };
 
@@ -61,8 +68,11 @@ function GameBoard() {
                 <TouchableOpacity
                   key={`${category}-${value}`}
                   style={styles.valueBox}
-                  onPress={() => selectQuestion(category, value)}>
-                  <Text style={styles.valueText}>${value}</Text>
+                  onPress={() => selectQuestion(category, value)}
+                  disabled={selectedQuestions[`${category}-${value}`]}>
+                  {!selectedQuestions[`${category}-${value}`] && (
+                    <Text style={styles.valueText}>${value}</Text>
+                  )}
                 </TouchableOpacity>
               ))}
             </View>
