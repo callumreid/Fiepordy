@@ -11,6 +11,7 @@ import {blueBGURI, jeopardyLogoURI} from '../constants/visualAssets';
 import {Scene} from '../../types/scenes';
 import {useAtom} from 'jotai';
 import {sceneAtom} from '../../atoms/atoms';
+import {localImages} from '../app/assets';
 
 const {width, height} = Dimensions.get('window');
 
@@ -41,13 +42,17 @@ const Category: React.FC<CategoryProps> = ({categories}) => {
   return showSplash ? (
     <View style={styles.container}>
       <ImageBackground
-        source={{uri: jeopardyLogoURI}}
+        source={
+          jeopardyLogoURI ? {uri: jeopardyLogoURI} : localImages.jeopardyLogo
+        }
         style={styles.backgroundImage}
       />
     </View>
   ) : (
     <View style={styles.container}>
-      <ImageBackground source={{uri: blueBGURI}} style={styles.backgroundImage}>
+      <ImageBackground
+        source={blueBGURI ? {uri: blueBGURI} : localImages.blueBG}
+        style={styles.backgroundImage}>
         <Text style={styles.categoryText}>
           {categories[currentCategoryIndex]}
         </Text>

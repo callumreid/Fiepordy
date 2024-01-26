@@ -10,6 +10,7 @@ import {sceneAtom} from '../../atoms/atoms';
 import {useAtom} from 'jotai';
 import {Scene} from '../../types/scenes';
 import {jeopardyLogoURI} from '../constants/visualAssets';
+import {localImages} from '../app/assets';
 
 const {width, height} = Dimensions.get('window');
 
@@ -19,14 +20,16 @@ const SplashScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setScene(Scene.GAME_MODE_SELECTION)}>
-        {jeopardyLogoURI && (
-          <Image
-            source={{
-              uri: jeopardyLogoURI,
-            }}
-            style={styles.backgroundImage}
-          />
-        )}
+        <Image
+          source={
+            jeopardyLogoURI
+              ? {
+                  uri: jeopardyLogoURI,
+                }
+              : localImages.jeopardyLogo
+          }
+          style={styles.backgroundImage}
+        />
       </TouchableOpacity>
     </View>
   );

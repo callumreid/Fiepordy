@@ -11,6 +11,7 @@ import {sceneAtom} from '../../atoms/atoms';
 import {Scene} from '../../types/scenes';
 import {finalJeopardyURI} from '../constants/visualAssets';
 import {FinalJeopardyProps} from '../../types/props';
+import {localImages} from '../app/assets';
 
 const {width, height} = Dimensions.get('window');
 
@@ -19,14 +20,16 @@ const FinalJeopardy: React.FC<FinalJeopardyProps> = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setScene(Scene.GAME_BOARD)}>
-        {finalJeopardyURI && (
-          <Image
-            source={{
-              uri: finalJeopardyURI,
-            }}
-            style={styles.backgroundImage}
-          />
-        )}
+        <Image
+          source={
+            finalJeopardyURI
+              ? {
+                  uri: finalJeopardyURI,
+                }
+              : localImages.finalJeopardy
+          }
+          style={styles.backgroundImage}
+        />
       </TouchableOpacity>
     </View>
   );

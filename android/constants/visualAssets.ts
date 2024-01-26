@@ -10,8 +10,11 @@ export const finalJeopardyURI =
 export const jeopardyTitleTextURI =
   'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.jeopardyTitleText.png';
 
-export const jeopardyLogoURI =
+export const jeopardyLogoSmallURI =
   'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.boardLogoTopRow.png';
+
+export const jeopardyLogoURI =
+  'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.jeopardyLogo.png';
 
 export const podiumWithYouURI =
   'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.podiumWithYou.png';

@@ -11,6 +11,7 @@ import {sceneAtom} from '../../atoms/atoms';
 import {Scene} from '../../types/scenes';
 import {dailyDoubleURI} from '../constants/visualAssets';
 import {DailyDoubleProps} from '../../types/props';
+import {localImages} from '../app/assets';
 
 const {width, height} = Dimensions.get('window');
 
@@ -19,14 +20,16 @@ const DailyDouble: React.FC<DailyDoubleProps> = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setScene(Scene.GAME_BOARD)}>
-        {dailyDoubleURI && (
-          <Image
-            source={{
-              uri: dailyDoubleURI,
-            }}
-            style={styles.backgroundImage}
-          />
-        )}
+        <Image
+          source={
+            dailyDoubleURI
+              ? {
+                  uri: dailyDoubleURI,
+                }
+              : localImages.dailyDouble
+          }
+          style={styles.backgroundImage}
+        />
       </TouchableOpacity>
     </View>
   );

@@ -11,7 +11,8 @@ import {
 import {sceneAtom} from '../../atoms/atoms';
 import {useAtom} from 'jotai';
 import {Scene} from '../../types/scenes';
-import {jeopardyTitleTextURI} from '../constants/visualAssets';
+import {blueBGURI, jeopardyTitleTextURI} from '../constants/visualAssets';
+import {localImages} from '../app/assets';
 
 const {width, height} = Dimensions.get('window');
 
@@ -20,9 +21,13 @@ const GameModeSelection = () => {
 
   return (
     <ImageBackground
-      source={{
-        uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.blueBG.png',
-      }}
+      source={
+        blueBGURI
+          ? {
+              uri: blueBGURI,
+            }
+          : localImages.blueBG
+      }
       style={styles.backgroundImage}>
       <View style={styles.container}>
         {jeopardyTitleTextURI && (

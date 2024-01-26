@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Dimensions,
   ImageBackground,
-  Image,
 } from 'react-native';
 import Podium from '../../components/Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
@@ -20,7 +19,8 @@ import {
 } from '../../atoms/atoms';
 import {useAtom} from 'jotai';
 import {GameBoardProps} from '../../types/props';
-import {boardImageURIs, gameBoardBlueStageURI} from '../constants/visualAssets';
+import {gameBoardBlueStageURI} from '../constants/visualAssets';
+import {localImages} from '../app/assets';
 
 const values = [200, 400, 800];
 const {width, height} = Dimensions.get('window');
@@ -51,7 +51,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
       <ImageBackground
         source={{
-          uri: gameBoardBlueStageURI ?? null,
+          uri: gameBoardBlueStageURI ?? localImages.gameBoardBlueStage,
         }}
         style={styles.fullscreen}
       />
