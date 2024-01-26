@@ -10,7 +10,11 @@ import {
 import Podium from './Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
 import {Scene} from '../types/scenes';
-import {sceneAtom} from '../atoms/atoms';
+import {
+  sceneAtom,
+  selectedCategoryAtom,
+  selectedValueAtom,
+} from '../atoms/atoms';
 import {useAtom} from 'jotai';
 
 const categories = [
@@ -24,9 +28,13 @@ const values = [200, 400, 800];
 const {width, height} = Dimensions.get('window');
 function GameBoard() {
   const [, setScene] = useAtom(sceneAtom);
+  const [, setSelectedCategory] = useAtom(selectedCategoryAtom);
+  const [, setSelectedValue] = useAtom(selectedValueAtom);
 
   const selectQuestion = (category: string, value: number) => {
     console.log(`Selected ${category} for $${value}`);
+    setSelectedCategory(category);
+    setSelectedValue(value);
     setScene(Scene.QUESTION);
   };
 
