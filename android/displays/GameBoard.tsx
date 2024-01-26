@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
   ImageBackground,
+  Image,
 } from 'react-native';
 import Podium from '../../components/Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
@@ -19,12 +20,13 @@ import {
 } from '../../atoms/atoms';
 import {useAtom} from 'jotai';
 import {GameBoardProps} from '../../types/props';
-import {gameBoardBlueStageURI} from '../constants/visualAssets';
+import {boardImageURIs, gameBoardBlueStageURI} from '../constants/visualAssets';
 
 const values = [200, 400, 800];
 const {width, height} = Dimensions.get('window');
 
 const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
+  // state
   const [, setScene] = useAtom(sceneAtom);
   const [, setSelectedCategory] = useAtom(selectedCategoryAtom);
   const [, setSelectedValue] = useAtom(selectedValueAtom);
@@ -33,6 +35,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
   );
   const [score] = useAtom(scoreAtom);
 
+  // handlers
   const handleSelectQuestion = (category: string, value: number) => {
     console.log(`Selected ${category} for $${value}`);
     setSelectedCategory(category);

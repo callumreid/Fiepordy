@@ -9,15 +9,11 @@ import GameModeSelection from './android/displays/GameModeSelection';
 import SplashScreen from './android/displays/SplashScreen';
 import DailyDouble from './android/displays/DailyDouble';
 import Category from './android/displays/Category';
+import {categories} from './android/constants/values';
 
 export default function App() {
   const [scene] = useAtom(sceneAtom);
-  const categories = [
-    'Myths & Legends',
-    'TV Show',
-    'Holidays Around The World',
-    '19th Century America',
-  ];
+
   return (
     <>
       {scene === Scene.SPLASH_SCREEN && <SplashScreen />}

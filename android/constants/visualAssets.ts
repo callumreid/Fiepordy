@@ -11,10 +11,39 @@ export const jeopardyTitleTextURI =
   'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.jeopardyTitleText.png';
 
 export const jeopardyLogoURI =
-  'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.jeopardyLogo.png';
+  'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.boardLogoTopRow.png';
 
 export const podiumWithYouURI =
   'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.podiumWithYou.png';
 
 export const blueBGURI =
   'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.blueBG.png';
+
+const BOARD_IMAGE_BASE_URL =
+  'https://custom-skills-public.s3.amazonaws.com/Fiepordy/';
+
+const generateBoardImageUri = (x: string, y: string) =>
+  `${BOARD_IMAGE_BASE_URL}.boardLogo.${x}.${y}.png`;
+
+export const boardImageURIs = {
+  1: {
+    1: generateBoardImageUri('1', '1'),
+    2: generateBoardImageUri('1', '2'),
+    3: generateBoardImageUri('1', '3'),
+  },
+  2: {
+    1: generateBoardImageUri('2', '1'),
+    2: generateBoardImageUri('2', '2'),
+    3: generateBoardImageUri('2', '3'),
+  },
+  3: {
+    1: generateBoardImageUri('3', '1'),
+    2: generateBoardImageUri('3', '2'),
+    3: generateBoardImageUri('3', '3'),
+  },
+  4: {
+    1: generateBoardImageUri('4', '1'),
+    2: generateBoardImageUri('4', '2'),
+    3: generateBoardImageUri('4', '3'),
+  },
+};
