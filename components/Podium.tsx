@@ -1,6 +1,7 @@
 // components/Podium.tsx
 import React from 'react';
 import {View, Image, StyleSheet, Text} from 'react-native';
+import {podiumWithYouURI} from '../android/constants/visualAssets';
 
 type PodiumProps = {
   name: string;
@@ -13,12 +14,14 @@ const Podium: React.FC<PodiumProps> = ({score}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.score}>{formattedScore}</Text>
-      <Image
-        source={{
-          uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.podiumWithYou.png',
-        }}
-        style={styles.podium}
-      />
+      {podiumWithYouURI && (
+        <Image
+          source={{
+            uri: podiumWithYouURI,
+          }}
+          style={styles.podium}
+        />
+      )}
     </View>
   );
 };

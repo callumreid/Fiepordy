@@ -9,22 +9,24 @@ import {
 import {useAtom} from 'jotai';
 import {sceneAtom} from '../../atoms/atoms';
 import {Scene} from '../../types/scenes';
-type DoubleJeopardyProps = {
-  // Add your props here
-};
+import {dailyDoubleURI} from '../constants/visualAssets';
+import {DailyDoubleProps} from '../../types/props';
+
 const {width, height} = Dimensions.get('window');
 
-const DailyDouble: React.FC<DoubleJeopardyProps> = () => {
+const DailyDouble: React.FC<DailyDoubleProps> = () => {
   const [, setScene] = useAtom(sceneAtom);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setScene(Scene.GAME_BOARD)}>
-        <Image
-          source={{
-            uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.dailyDouble.png',
-          }}
-          style={styles.backgroundImage}
-        />
+        {dailyDoubleURI && (
+          <Image
+            source={{
+              uri: dailyDoubleURI,
+            }}
+            style={styles.backgroundImage}
+          />
+        )}
       </TouchableOpacity>
     </View>
   );

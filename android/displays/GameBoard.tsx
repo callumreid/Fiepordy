@@ -18,17 +18,13 @@ import {
   selectedValueAtom,
 } from '../../atoms/atoms';
 import {useAtom} from 'jotai';
-
-const categories = [
-  'Myths & Legends',
-  'TV Show',
-  'Holidays Around The World',
-  '19th Century America',
-];
+import {GameBoardProps} from '../../types/props';
+import {gameBoardBlueStageURI} from '../constants/visualAssets';
 
 const values = [200, 400, 800];
 const {width, height} = Dimensions.get('window');
-function GameBoard() {
+
+const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
   const [, setScene] = useAtom(sceneAtom);
   const [, setSelectedCategory] = useAtom(selectedCategoryAtom);
   const [, setSelectedValue] = useAtom(selectedValueAtom);
@@ -52,7 +48,7 @@ function GameBoard() {
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
       <ImageBackground
         source={{
-          uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.stageBGBlue.png',
+          uri: gameBoardBlueStageURI ?? null,
         }}
         style={styles.fullscreen}
       />
@@ -88,7 +84,7 @@ function GameBoard() {
       <ImageBackground />
     </Animated.View>
   );
-}
+};
 const styles = StyleSheet.create({
   fullscreen: {
     flex: 1,

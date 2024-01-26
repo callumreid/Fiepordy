@@ -11,6 +11,7 @@ import {
 import {sceneAtom} from '../../atoms/atoms';
 import {useAtom} from 'jotai';
 import {Scene} from '../../types/scenes';
+import {jeopardyTitleTextURI} from '../constants/visualAssets';
 
 const {width, height} = Dimensions.get('window');
 
@@ -24,21 +25,23 @@ const GameModeSelection = () => {
       }}
       style={styles.backgroundImage}>
       <View style={styles.container}>
-        <Image
-          source={{
-            uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.jeopardyTitleText.png',
-          }}
-          style={styles.logo}
-        />
+        {jeopardyTitleTextURI && (
+          <Image
+            source={{
+              uri: jeopardyTitleTextURI,
+            }}
+            style={styles.logo}
+          />
+        )}
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => setScene(Scene.GAME_BOARD)}>
+          onPress={() => setScene(Scene.CATEGORY)}>
           <Text style={styles.buttonText}>Play</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => setScene(Scene.GAME_BOARD)}>
+          onPress={() => setScene(Scene.CATEGORY)}>
           <Text style={styles.buttonText}>Practice</Text>
         </TouchableOpacity>
       </View>

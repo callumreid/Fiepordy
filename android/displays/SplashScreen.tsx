@@ -9,6 +9,7 @@ import {
 import {sceneAtom} from '../../atoms/atoms';
 import {useAtom} from 'jotai';
 import {Scene} from '../../types/scenes';
+import {jeopardyLogoURI} from '../constants/visualAssets';
 
 const {width, height} = Dimensions.get('window');
 
@@ -18,12 +19,14 @@ const SplashScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setScene(Scene.GAME_MODE_SELECTION)}>
-        <Image
-          source={{
-            uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.jeopardyLogo.png',
-          }}
-          style={styles.backgroundImage}
-        />
+        {jeopardyLogoURI && (
+          <Image
+            source={{
+              uri: jeopardyLogoURI,
+            }}
+            style={styles.backgroundImage}
+          />
+        )}
       </TouchableOpacity>
     </View>
   );
