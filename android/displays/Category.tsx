@@ -7,7 +7,7 @@ import {
   Text,
 } from 'react-native';
 import {CategoryProps} from '../../types/props';
-import {blueBGURI} from '../constants/visualAssets';
+import {blueBGURI, jeopardyLogoURI} from '../constants/visualAssets';
 import {Scene} from '../../types/scenes';
 import {useAtom} from 'jotai';
 import {sceneAtom} from '../../atoms/atoms';
@@ -17,26 +17,37 @@ const {width, height} = Dimensions.get('window');
 const Category: React.FC<CategoryProps> = ({categories}) => {
   const [, setScene] = useAtom(sceneAtom);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
+  const [showSplash, setShowSplash] = useState(false);
 
   useEffect(() => {
-    if (currentCategoryIndex < categories.length) {
-      const timer = setTimeout(() => {
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (showSplash) {
+      timer = setTimeout(() => {
+        setShowSplash(false);
+      }, 1000);
+    } else if (currentCategoryIndex < categories.length) {
+      timer = setTimeout(() => {
+        setShowSplash(true);
         setCurrentCategoryIndex(prevIndex => prevIndex + 1);
       }, 2000);
-
-      return () => clearTimeout(timer);
     } else {
       setScene(Scene.GAME_BOARD);
     }
-  }, [currentCategoryIndex, categories.length, setScene]);
 
-  return (
+    return () => clearTimeout(timer);
+  }, [currentCategoryIndex, categories.length, setScene, showSplash]);
+
+  return showSplash ? (
     <View style={styles.container}>
       <ImageBackground
-        source={{
-          uri: blueBGURI,
-        }}
-        style={styles.backgroundImage}>
+        source={{uri: jeopardyLogoURI}}
+        style={styles.backgroundImage}
+      />
+    </View>
+  ) : (
+    <View style={styles.container}>
+      <ImageBackground source={{uri: blueBGURI}} style={styles.backgroundImage}>
         <Text style={styles.categoryText}>
           {categories[currentCategoryIndex]}
         </Text>
