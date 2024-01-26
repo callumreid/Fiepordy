@@ -1,5 +1,5 @@
 import React from 'react';
-import GameBoard from './components/GameBoard';
+import GameBoard from './android/displays/GameBoard';
 import FinalJeopardy from './android/displays/FinalJeopardy';
 import Question from './components/Question';
 import {Scene} from './types/scenes';

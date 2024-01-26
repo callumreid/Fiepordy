@@ -1,6 +1,6 @@
 // components/Podium.tsx
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, Text} from 'react-native';
 
 type PodiumProps = {
   name: string;
@@ -8,9 +8,11 @@ type PodiumProps = {
   isCurrentUser?: boolean;
 };
 
-const Podium: React.FC<PodiumProps> = () => {
+const Podium: React.FC<PodiumProps> = ({score}) => {
+  const formattedScore = score < 0 ? `-$${Math.abs(score)}` : `$${score}`;
   return (
     <View style={styles.container}>
+      <Text style={styles.score}>{formattedScore}</Text>
       <Image
         source={{
           uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.podiumWithYou.png',
@@ -33,11 +35,8 @@ const styles = StyleSheet.create({
   score: {
     color: '#FFF',
     fontSize: 24,
-  },
-  name: {
-    color: '#FFF',
-    fontSize: 20,
-    marginTop: 5,
+    marginBottom: -80,
+    zIndex: 10,
   },
   podium: {
     width: 200,

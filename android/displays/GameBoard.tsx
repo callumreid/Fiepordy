@@ -7,15 +7,16 @@ import {
   Dimensions,
   ImageBackground,
 } from 'react-native';
-import Podium from './Podium';
+import Podium from '../../components/Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
-import {Scene} from '../types/scenes';
+import {Scene} from '../../types/scenes';
 import {
   sceneAtom,
+  scoreAtom,
   selectedCategoryAtom,
   selectedQuestionsAtom,
   selectedValueAtom,
-} from '../atoms/atoms';
+} from '../../atoms/atoms';
 import {useAtom} from 'jotai';
 
 const categories = [
@@ -34,7 +35,9 @@ function GameBoard() {
   const [selectedQuestions, setSelectedQuestions] = useAtom(
     selectedQuestionsAtom,
   );
-  const selectQuestion = (category: string, value: number) => {
+  const [score] = useAtom(scoreAtom);
+
+  const handleSelectQuestion = (category: string, value: number) => {
     console.log(`Selected ${category} for $${value}`);
     setSelectedCategory(category);
     setSelectedValue(value);
@@ -68,7 +71,7 @@ function GameBoard() {
                 <TouchableOpacity
                   key={`${category}-${value}`}
                   style={styles.valueBox}
-                  onPress={() => selectQuestion(category, value)}
+                  onPress={() => handleSelectQuestion(category, value)}
                   disabled={selectedQuestions[`${category}-${value}`]}>
                   {!selectedQuestions[`${category}-${value}`] && (
                     <Text style={styles.valueText}>${value}</Text>
@@ -80,7 +83,7 @@ function GameBoard() {
         </View>
       </View>
       <View style={styles.podiumContainer}>
-        <Podium name="You" score={0} isCurrentUser={true} />
+        <Podium name="You" score={score} isCurrentUser={true} />
       </View>
       <ImageBackground />
     </Animated.View>
