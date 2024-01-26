@@ -1,26 +1,27 @@
 import React from 'react';
 import {
   View,
-  TouchableOpacity,
   StyleSheet,
-  Dimensions,
+  TouchableOpacity,
   Image,
+  Dimensions,
 } from 'react-native';
-import {sceneAtom} from '../../atoms/atoms';
 import {useAtom} from 'jotai';
+import {sceneAtom} from '../../atoms/atoms';
 import {Scene} from '../../types/scenes';
-
+type DoubleJeopardyProps = {
+  // Add your props here
+};
 const {width, height} = Dimensions.get('window');
 
-const SplashScreen = () => {
+const DoubleJeopardy: React.FC<DoubleJeopardyProps> = () => {
   const [, setScene] = useAtom(sceneAtom);
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setScene(Scene.GAME_MODE_SELECTION)}>
+      <TouchableOpacity onPress={() => setScene(Scene.GAME_BOARD)}>
         <Image
           source={{
-            uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.jeopardyLogo.png',
+            uri: 'https://custom-skills-public.s3.amazonaws.com/Fiepordy/fiepordy.dailyDouble.png',
           }}
           style={styles.backgroundImage}
         />
@@ -44,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SplashScreen;
+export default DoubleJeopardy;

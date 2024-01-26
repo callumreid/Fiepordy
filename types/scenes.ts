@@ -4,4 +4,5 @@ export enum Scene {
   QUESTION,
   FINAL_JEOPARDY,
   GAME_MODE_SELECTION,
+  DOUBLE_JEOPARDY,
 }

@@ -9,7 +9,7 @@ const Question = () => {
   const [, setScene] = useAtom(sceneAtom);
   return (
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
-      <TouchableOpacity onPress={() => setScene(Scene.GAMEBOARD)}>
+      <TouchableOpacity onPress={() => setScene(Scene.GAME_BOARD)}>
         <Text style={styles.question}>Question Question :D!</Text>
       </TouchableOpacity>
     </Animated.View>
