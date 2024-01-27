@@ -6,9 +6,9 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
-import {sceneAtom} from '../../atoms/atoms';
+import {sceneAtom} from '../atoms/atoms';
 import {useAtom} from 'jotai';
-import {Scene} from '../../types/scenes';
+import {Scene} from '../types/scenes';
 import {jeopardyLogoURI} from '../constants/visualAssets';
 
 const {width, height} = Dimensions.get('window');

@@ -7,18 +7,18 @@ import {
   Dimensions,
   ImageBackground,
 } from 'react-native';
-import Podium from '../../components/Podium';
+import Podium from '../components/Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
-import {Scene} from '../../types/scenes';
+import {Scene} from '../types/scenes';
 import {
   sceneAtom,
   scoreAtom,
   selectedCategoryAtom,
   selectedQuestionsAtom,
   selectedValueAtom,
-} from '../../atoms/atoms';
+} from '../atoms/atoms';
 import {useAtom} from 'jotai';
-import {GameBoardProps} from '../../types/props';
+import {GameBoardProps} from '../types/props';
 import {gameBoardBlueStageURI} from '../constants/visualAssets';
 
 const values = [300, 400, 800];

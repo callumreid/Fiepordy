@@ -7,22 +7,22 @@ import {
   Dimensions,
 } from 'react-native';
 import {useAtom} from 'jotai';
-import {sceneAtom} from '../../atoms/atoms';
-import {Scene} from '../../types/scenes';
-import {finalJeopardyURI} from '../constants/visualAssets';
-import {FinalJeopardyProps} from '../../types/props';
+import {sceneAtom} from '../atoms/atoms';
+import {Scene} from '../types/scenes';
+import {dailyDoubleURI} from '../constants/visualAssets';
+import {DailyDoubleProps} from '../types/props';
 
 const {width, height} = Dimensions.get('window');
 
-const FinalJeopardy: React.FC<FinalJeopardyProps> = () => {
+const DailyDouble: React.FC<DailyDoubleProps> = () => {
   const [, setScene] = useAtom(sceneAtom);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setScene(Scene.GAME_BOARD)}>
-        {finalJeopardyURI && (
+        {dailyDoubleURI && (
           <Image
             source={{
-              uri: finalJeopardyURI,
+              uri: dailyDoubleURI,
             }}
             style={styles.backgroundImage}
           />
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FinalJeopardy;
+export default DailyDouble;
