@@ -1,7 +1,7 @@
 // components/Podium.tsx
 import React from 'react';
 import {View, Image, StyleSheet, Text} from 'react-native';
-import {podiumWithYouURI} from '../android/constants/visualAssets';
+import {podiumWithYouURI} from '../constants/visualAssets';
 
 type PodiumProps = {
   name: string;

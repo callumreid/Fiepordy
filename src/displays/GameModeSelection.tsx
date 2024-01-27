@@ -8,22 +8,21 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
-import {sceneAtom} from '../../atoms/atoms';
+import {sceneAtom} from '../atoms/atoms';
 import {useAtom} from 'jotai';
-import {Scene} from '../../types/scenes';
 import {blueBGURI, jeopardyTitleTextURI} from '../constants/visualAssets';
-import {localImages} from '../app/assets';
+import {localImages} from '../../android/app/assets';
 import {TVEventHandler, useTVEventHandler} from 'react-native-tvos';
+import {Scene} from '../types/scenes';
 
 const {width, height} = Dimensions.get('window');
 
 const GameModeSelection = () => {
   const [, setScene] = useAtom(sceneAtom);
   const [_lastEventType, setLastEventType] = React.useState('');
-  console.log('hi')
 
   const myTVEventHandler = evt => {
-    console.log('evt')
+    console.log('evt');
     setLastEventType(evt.eventType);
   };
 
