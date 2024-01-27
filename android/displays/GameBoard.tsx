@@ -22,7 +22,7 @@ import {GameBoardProps} from '../../types/props';
 import {gameBoardBlueStageURI} from '../constants/visualAssets';
 import {localImages} from '../app/assets';
 
-const values = [200, 400, 800];
+const values = [300, 400, 800];
 const {width, height} = Dimensions.get('window');
 
 const GameBoard: React.FC<GameBoardProps> = ({categories}) => {

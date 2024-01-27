@@ -13,11 +13,21 @@ import {useAtom} from 'jotai';
 import {Scene} from '../../types/scenes';
 import {blueBGURI, jeopardyTitleTextURI} from '../constants/visualAssets';
 import {localImages} from '../app/assets';
+import {TVEventHandler, useTVEventHandler} from 'react-native-tvos';
 
 const {width, height} = Dimensions.get('window');
 
 const GameModeSelection = () => {
   const [, setScene] = useAtom(sceneAtom);
+  const [_lastEventType, setLastEventType] = React.useState('');
+  console.log('hi')
+
+  const myTVEventHandler = evt => {
+    console.log('evt')
+    setLastEventType(evt.eventType);
+  };
+
+  useTVEventHandler(myTVEventHandler);
 
   return (
     <ImageBackground
@@ -39,14 +49,10 @@ const GameModeSelection = () => {
           />
         )}
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setScene(Scene.CATEGORY)}>
-          <Text style={styles.buttonText}>Play</Text>
+        <TouchableOpacity style={styles.button} onPress={() => {}}>
+          <Text style={styles.buttonText}>Play {_lastEventType}</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setScene(Scene.CATEGORY)}>
+        <TouchableOpacity style={styles.button} onPress={() => {}}>
           <Text style={styles.buttonText}>Practice</Text>
         </TouchableOpacity>
       </View>
