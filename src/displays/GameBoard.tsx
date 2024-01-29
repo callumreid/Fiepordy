@@ -26,6 +26,7 @@ import {
 } from '../constants/visualAssets';
 import {localImages} from '../../android/app/assets';
 import Podium from '../components/Podium';
+import Animated, {FadeOut} from 'react-native-reanimated';
 
 const values = [300, 400, 800];
 const {width, height} = Dimensions.get('window');
@@ -54,7 +55,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
 
   const preGameBoardDisplay = true;
   return (
-    <View style={styles.container}>
+    <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
       <ImageBackground
         source={{
           uri: gameBoardBlueStageURI ?? localImages.gameBoardBlueStage,
@@ -127,7 +128,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
       <View style={styles.podiumContainer}>
         <Podium name="You" score={score} isCurrentUser={true} />
       </View>
-    </View>
+    </Animated.View>
   );
 };
 const styles = StyleSheet.create({
@@ -154,7 +155,6 @@ const styles = StyleSheet.create({
   },
   logoSmall: {
     flex: 1,
-    textAlign: 'center',
     paddingVertical: 20,
     marginHorizontal: 2,
     width: 85,

@@ -14,6 +14,7 @@ import {blueBGURI, jeopardyTitleTextURI} from '../constants/visualAssets';
 import {localImages} from '../../android/app/assets';
 import {useTVEventHandler} from 'react-native';
 import {Scene} from '../types/scenes';
+import Animated, {FadeOut} from 'react-native-reanimated';
 
 const {width, height} = Dimensions.get('window');
 
@@ -29,37 +30,31 @@ const GameModeSelection = () => {
   useTVEventHandler(myTVEventHandler);
 
   return (
-    <ImageBackground
-      source={
-        blueBGURI
-          ? {
-              uri: blueBGURI,
-            }
-          : localImages.blueBG
-      }
-      style={styles.backgroundImage}>
-      <View style={styles.container}>
-        {jeopardyTitleTextURI && (
-          <Image
-            source={{
-              uri: jeopardyTitleTextURI,
-            }}
-            style={styles.logo}
-          />
-        )}
+    <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
+      <ImageBackground source={{uri: blueBGURI}} style={styles.backgroundImage}>
+        <View style={styles.container}>
+          {jeopardyTitleTextURI && (
+            <Image
+              source={{
+                uri: jeopardyTitleTextURI,
+              }}
+              style={styles.logo}
+            />
+          )}
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
-          <Text style={styles.buttonText}>Play {_lastEventType}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setScene(Scene.GAME_BOARD);
-          }}>
-          <Text style={styles.buttonText}>Practice</Text>
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
+          <TouchableOpacity style={styles.button} onPress={() => {}}>
+            <Text style={styles.buttonText}>Play {_lastEventType}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setScene(Scene.GAME_BOARD);
+            }}>
+            <Text style={styles.buttonText}>Practice</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
+    </Animated.View>
   );
 };
 
