@@ -28,7 +28,7 @@ const BOARD_IMAGE_BASE_URL =
 const generateBoardImageUri = (x: string, y: string) =>
   `${BOARD_IMAGE_BASE_URL}.boardLogo.${x}.${y}.png`;
 
-export const boardImageURIs = {
+export const boardImageURIs: {[key: string]: {[key: string]: string}} = {
   1: {
     1: generateBoardImageUri('1', '1'),
     2: generateBoardImageUri('1', '2'),

@@ -8,7 +8,7 @@ import {
   ImageBackground,
   Image,
 } from 'react-native';
-import Podium from '../components/Podium';
+
 import {Scene} from '../types/scenes';
 import {
   sceneAtom,
@@ -20,10 +20,12 @@ import {
 import {useAtom} from 'jotai';
 import {GameBoardProps} from '../types/props';
 import {
+  boardImageURIs,
   gameBoardBlueStageURI,
   jeopardyLogoSmallURI,
 } from '../constants/visualAssets';
 import {localImages} from '../../android/app/assets';
+import Podium from '../components/Podium';
 
 const values = [300, 400, 800];
 const {width, height} = Dimensions.get('window');
@@ -81,23 +83,46 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
             ))}
           </View>
         )}
-        <View style={styles.valuesContainer}>
-          {values.map(value => (
-            <View key={value} style={styles.valueRow}>
-              {categories.map(category => (
-                <TouchableOpacity
-                  key={`${category}-${value}`}
-                  style={styles.valueBox}
-                  onPress={() => handleSelectQuestion(category, value)}
-                  disabled={selectedQuestions[`${category}-${value}`]}>
-                  {!selectedQuestions[`${category}-${value}`] && (
-                    <Text style={styles.valueText}>${value}</Text>
-                  )}
-                </TouchableOpacity>
-              ))}
-            </View>
-          ))}
-        </View>
+        {preGameBoardDisplay ? (
+          <View style={styles.valuesContainer}>
+            {values.map(value => (
+              <View key={value} style={styles.valueRow}>
+                {categories.map((category, categoryIndex) => {
+                  const x = (categoryIndex + 1).toString();
+                  const y = (categoryIndex + 1).toString();
+
+                  const imageURI = boardImageURIs[x][y];
+
+                  return (
+                    <Image
+                      key={`${category}-${value}`}
+                      style={styles.logoSmall}
+                      source={{uri: imageURI}}
+                    />
+                  );
+                })}
+              </View>
+            ))}
+          </View>
+        ) : (
+          <View style={styles.valuesContainer}>
+            {values.map(value => (
+              <View key={value} style={styles.valueRow}>
+                {categories.map(category => (
+                  <TouchableOpacity
+                    key={`${category}-${value}`}
+                    style={styles.valueBox}
+                    onPress={() => handleSelectQuestion(category, value)}
+                    disabled={selectedQuestions[`${category}-${value}`]}>
+                    {!selectedQuestions[`${category}-${value}`] && (
+                      <Text style={styles.valueText}>${value}</Text>
+                    )}
+                  </TouchableOpacity>
+                ))}
+              </View>
+            ))}
+          </View>
+        )}
       </View>
       <View style={styles.podiumContainer}>
         <Podium name="You" score={score} isCurrentUser={true} />
