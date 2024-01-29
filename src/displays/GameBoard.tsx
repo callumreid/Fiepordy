@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   Dimensions,
   ImageBackground,
+  Image,
 } from 'react-native';
 import Podium from '../components/Podium';
-import Animated, {FadeOut} from 'react-native-reanimated';
 import {Scene} from '../types/scenes';
 import {
   sceneAtom,
@@ -19,7 +19,10 @@ import {
 } from '../atoms/atoms';
 import {useAtom} from 'jotai';
 import {GameBoardProps} from '../types/props';
-import {gameBoardBlueStageURI} from '../constants/visualAssets';
+import {
+  gameBoardBlueStageURI,
+  jeopardyLogoSmallURI,
+} from '../constants/visualAssets';
 import {localImages} from '../../android/app/assets';
 
 const values = [300, 400, 800];
@@ -47,6 +50,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
     setScene(Scene.QUESTION);
   };
 
+  const preGameBoardDisplay = true;
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -56,13 +60,27 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
         style={styles.fullscreen}
       />
       <View style={styles.gameBoard}>
-        <View style={styles.categoriesContainer}>
-          {categories.map(category => (
-            <Text key={category} style={styles.categoryTitle}>
-              {category}
-            </Text>
-          ))}
-        </View>
+        {preGameBoardDisplay ? (
+          <View style={styles.categoriesContainer}>
+            {categories.map(category => (
+              <Image
+                key={category}
+                style={styles.logoSmall}
+                source={{
+                  uri: jeopardyLogoSmallURI ?? localImages.jeopardyLogoSmall,
+                }}
+              />
+            ))}
+          </View>
+        ) : (
+          <View style={styles.categoriesContainer}>
+            {categories.map(category => (
+              <Text key={category} style={styles.categoryTitle}>
+                {category}
+              </Text>
+            ))}
+          </View>
+        )}
         <View style={styles.valuesContainer}>
           {values.map(value => (
             <View key={value} style={styles.valueRow}>
@@ -109,6 +127,14 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     width: '100%',
   },
+  logoSmall: {
+    flex: 1,
+    textAlign: 'center',
+    paddingVertical: 20,
+    marginHorizontal: 2,
+    width: 85,
+    height: 80,
+  },
   categoryTitle: {
     color: 'white',
     fontSize: 14,
@@ -118,8 +144,8 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     backgroundColor: '#1b199c',
     marginHorizontal: 2,
-    maxWidth: 145,
-    maxHeight: 80,
+    width: 85,
+    height: 80,
   },
   valuesContainer: {
     marginBottom: 100,
@@ -136,8 +162,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
     alignItems: 'center',
     justifyContent: 'center',
-    maxWidth: 145,
-    maxHeight: 80,
+    width: 85,
+    height: 80,
   },
   valueText: {
     color: '#EABD5E',
