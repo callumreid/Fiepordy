@@ -86,11 +86,11 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
         )}
         {preGameBoardDisplay ? (
           <View style={styles.valuesContainer}>
-            {values.map(value => (
+            {values.map((value, valueIndex) => (
               <View key={value} style={styles.valueRow}>
                 {categories.map((category, categoryIndex) => {
                   const x = (categoryIndex + 1).toString();
-                  const y = (categoryIndex + 1).toString();
+                  const y = (valueIndex + 1).toString();
 
                   const imageURI = boardImageURIs[x][y];
 

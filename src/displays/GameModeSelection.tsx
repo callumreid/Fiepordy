@@ -11,7 +11,6 @@ import {
 import {sceneAtom} from '../atoms/atoms';
 import {useAtom} from 'jotai';
 import {blueBGURI, jeopardyTitleTextURI} from '../constants/visualAssets';
-import {localImages} from '../../android/app/assets';
 import {useTVEventHandler} from 'react-native';
 import {Scene} from '../types/scenes';
 import Animated, {FadeOut} from 'react-native-reanimated';
