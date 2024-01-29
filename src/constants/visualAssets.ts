@@ -26,9 +26,9 @@ const BOARD_IMAGE_BASE_URL =
   'https://custom-skills-public.s3.amazonaws.com/Fiepordy/';
 
 const generateBoardImageUri = (x: string, y: string) =>
-  `${BOARD_IMAGE_BASE_URL}.boardLogo.${x}.${y}.png`;
+  `${BOARD_IMAGE_BASE_URL}fiepordy.boardLogo.x${x}.y${y}.png`;
 
-export const boardImageURIs = {
+export const boardImageURIs: {[key: string]: {[key: string]: string}} = {
   1: {
     1: generateBoardImageUri('1', '1'),
     2: generateBoardImageUri('1', '2'),
