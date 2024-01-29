@@ -48,7 +48,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
   };
 
   return (
-    <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
+    <View style={styles.container}>
       <ImageBackground
         source={{
           uri: gameBoardBlueStageURI ?? localImages.gameBoardBlueStage,
@@ -84,7 +84,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
       <View style={styles.podiumContainer}>
         <Podium name="You" score={score} isCurrentUser={true} />
       </View>
-    </Animated.View>
+    </View>
   );
 };
 const styles = StyleSheet.create({
