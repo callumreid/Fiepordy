@@ -1,15 +1,15 @@
 import React from 'react';
-import GameBoard from './android/displays/GameBoard';
-import FinalJeopardy from './android/displays/FinalJeopardy';
+import GameBoard from './displays/GameBoard';
+import FinalJeopardy from './displays/FinalJeopardy';
 import Question from './components/Question';
 import {Scene} from './types/scenes';
 import {useAtom} from 'jotai';
 import {sceneAtom} from './atoms/atoms';
-import GameModeSelection from './android/displays/GameModeSelection';
-import SplashScreen from './android/displays/SplashScreen';
-import DailyDouble from './android/displays/DailyDouble';
-import Category from './android/displays/Category';
-import {categories} from './android/constants/values';
+import {categories} from './constants/values';
+import GameModeSelection from './displays/GameModeSelection';
+import SplashScreen from './displays/SplashScreen';
+import DailyDouble from './displays/DailyDouble';
+import Category from './displays/Category';
 
 export default function App() {
   const [scene] = useAtom(sceneAtom);

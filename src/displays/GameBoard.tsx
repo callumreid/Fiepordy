@@ -7,22 +7,22 @@ import {
   Dimensions,
   ImageBackground,
 } from 'react-native';
-import Podium from '../../components/Podium';
+import Podium from '../components/Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
-import {Scene} from '../../types/scenes';
+import {Scene} from '../types/scenes';
 import {
   sceneAtom,
   scoreAtom,
   selectedCategoryAtom,
   selectedQuestionsAtom,
   selectedValueAtom,
-} from '../../atoms/atoms';
+} from '../atoms/atoms';
 import {useAtom} from 'jotai';
-import {GameBoardProps} from '../../types/props';
+import {GameBoardProps} from '../types/props';
 import {gameBoardBlueStageURI} from '../constants/visualAssets';
 import {localImages} from '../app/assets';
 
-const values = [200, 400, 800];
+const values = [300, 400, 800];
 const {width, height} = Dimensions.get('window');
 
 const GameBoard: React.FC<GameBoardProps> = ({categories}) => {

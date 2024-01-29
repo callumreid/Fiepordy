@@ -6,12 +6,12 @@ import {
   ImageBackground,
   Text,
 } from 'react-native';
-import {CategoryProps} from '../../types/props';
+import {CategoryProps} from '../types/props';
 import {blueBGURI, jeopardyLogoURI} from '../constants/visualAssets';
-import {Scene} from '../../types/scenes';
+import {Scene} from '../types/scenes';
 import {useAtom} from 'jotai';
-import {sceneAtom} from '../../atoms/atoms';
-import {localImages} from '../app/assets';
+import {localImages} from '../../android/app/assets';
+import {sceneAtom} from '../atoms/atoms';
 
 const {width, height} = Dimensions.get('window');
 

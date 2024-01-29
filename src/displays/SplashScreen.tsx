@@ -1,32 +1,32 @@
 import React from 'react';
 import {
   View,
-  StyleSheet,
   TouchableOpacity,
-  Image,
+  StyleSheet,
   Dimensions,
+  Image,
 } from 'react-native';
+import {sceneAtom} from '../atoms/atoms';
 import {useAtom} from 'jotai';
-import {sceneAtom} from '../../atoms/atoms';
-import {Scene} from '../../types/scenes';
-import {finalJeopardyURI} from '../constants/visualAssets';
-import {FinalJeopardyProps} from '../../types/props';
+import {Scene} from '../types/scenes';
+import {jeopardyLogoURI} from '../constants/visualAssets';
 import {localImages} from '../app/assets';
 
 const {width, height} = Dimensions.get('window');
 
-const FinalJeopardy: React.FC<FinalJeopardyProps> = () => {
+const SplashScreen = () => {
   const [, setScene] = useAtom(sceneAtom);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setScene(Scene.GAME_BOARD)}>
+      <TouchableOpacity onPress={() => setScene(Scene.GAME_MODE_SELECTION)}>
         <Image
           source={
-            finalJeopardyURI
+            jeopardyLogoURI
               ? {
-                  uri: finalJeopardyURI,
+                  uri: jeopardyLogoURI,
                 }
-              : localImages.finalJeopardy
+              : localImages.jeopardyLogo
           }
           style={styles.backgroundImage}
         />
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FinalJeopardy;
+export default SplashScreen;

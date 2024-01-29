@@ -7,11 +7,11 @@ import {
   Dimensions,
 } from 'react-native';
 import {useAtom} from 'jotai';
-import {sceneAtom} from '../../atoms/atoms';
-import {Scene} from '../../types/scenes';
+import {sceneAtom} from '../atoms/atoms';
+import {Scene} from '../types/scenes';
 import {dailyDoubleURI} from '../constants/visualAssets';
-import {DailyDoubleProps} from '../../types/props';
-import {localImages} from '../app/assets';
+import {localImages} from '../../android/app/assets';
+import {DailyDoubleProps} from '../types/props';
 
 const {width, height} = Dimensions.get('window');
 
