@@ -20,7 +20,7 @@ import {
 import {useAtom} from 'jotai';
 import {GameBoardProps} from '../types/props';
 import {gameBoardBlueStageURI} from '../constants/visualAssets';
-import {localImages} from '../app/assets';
+import {localImages} from '../../android/app/assets';
 
 const values = [300, 400, 800];
 const {width, height} = Dimensions.get('window');
@@ -84,7 +84,6 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
       <View style={styles.podiumContainer}>
         <Podium name="You" score={score} isCurrentUser={true} />
       </View>
-      <ImageBackground />
     </Animated.View>
   );
 };

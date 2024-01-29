@@ -10,7 +10,7 @@ import {sceneAtom} from '../atoms/atoms';
 import {useAtom} from 'jotai';
 import {Scene} from '../types/scenes';
 import {jeopardyLogoURI} from '../constants/visualAssets';
-import {localImages} from '../app/assets';
+import {localImages} from '../../android/app/assets';
 
 const {width, height} = Dimensions.get('window');
 
