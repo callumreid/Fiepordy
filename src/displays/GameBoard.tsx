@@ -48,7 +48,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
       <ImageBackground
         source={{
-          uri: gameBoardBlueStageURI ?? null,
+          uri: gameBoardBlueStageURI,
         }}
         style={styles.fullscreen}
       />
@@ -81,7 +81,6 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
       <View style={styles.podiumContainer}>
         <Podium name="You" score={score} isCurrentUser={true} />
       </View>
-      <ImageBackground />
     </Animated.View>
   );
 };

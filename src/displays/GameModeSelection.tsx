@@ -43,10 +43,14 @@ const GameModeSelection = () => {
           />
         )}
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setScene(Scene.GAME_BOARD)}>
           <Text style={styles.buttonText}>Play {_lastEventType}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setScene(Scene.GAME_BOARD)}>
           <Text style={styles.buttonText}>Practice</Text>
         </TouchableOpacity>
       </View>
