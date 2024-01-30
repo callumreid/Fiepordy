@@ -131,7 +131,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
       </View>
       <View style={styles.chatBubbleContainer}>
         <ChatBubble>
-          <Text style={styles.chatBubbleText}>I'm 😊</Text>
+          <Text style={styles.chatBubbleText}>I'm a cute chat bubble 😊</Text>
         </ChatBubble>
       </View>
     </Animated.View>
