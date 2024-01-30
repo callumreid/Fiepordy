@@ -16,6 +16,7 @@ import {
   selectedCategoryAtom,
   selectedQuestionsAtom,
   selectedValueAtom,
+  userResponseAtom,
 } from '../atoms/atoms';
 import {useAtom} from 'jotai';
 import {GameBoardProps} from '../types/props';
@@ -41,6 +42,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
     selectedQuestionsAtom,
   );
   const [score] = useAtom(scoreAtom);
+  const [userResponse, setUserResponse] = useAtom(userResponseAtom);
 
   // handlers
   const handleSelectQuestion = (category: string, value: number) => {
@@ -127,13 +129,20 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
         )}
       </View>
       <View style={styles.podiumContainer}>
-        <Podium name="You" score={score} isCurrentUser={true} />
+        <Podium
+          name="You"
+          score={score}
+          isCurrentUser={true}
+          setUserResponse={setUserResponse}
+        />
       </View>
-      <View style={styles.chatBubbleContainer}>
-        <ChatBubble>
-          <Text style={styles.chatBubbleText}>I'm a cute chat bubble 😊</Text>
-        </ChatBubble>
-      </View>
+      {userResponse !== '' && (
+        <View style={styles.chatBubbleContainer}>
+          <ChatBubble>
+            <Text style={styles.chatBubbleText}>{userResponse}</Text>
+          </ChatBubble>
+        </View>
+      )}
     </Animated.View>
   );
 };
@@ -213,8 +222,8 @@ const styles = StyleSheet.create({
   chatBubbleContainer: {
     position: 'absolute',
     bottom: 150,
-    right: 500,
-    maxWidth: 300,
+    left: 435,
+    width: 500,
   },
   chatBubbleText: {
     fontSize: 28,

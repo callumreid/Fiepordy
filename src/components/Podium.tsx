@@ -1,27 +1,31 @@
 // components/Podium.tsx
 import React from 'react';
-import {View, Image, StyleSheet, Text} from 'react-native';
+import {View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {podiumWithYouURI} from '../constants/visualAssets';
 
 type PodiumProps = {
+  setUserResponse: any;
   name: string;
   score: number;
   isCurrentUser?: boolean;
 };
 
-const Podium: React.FC<PodiumProps> = ({score}) => {
+const Podium: React.FC<PodiumProps> = ({score, setUserResponse}) => {
   const formattedScore = score < 0 ? `-$${Math.abs(score)}` : `$${score}`;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.score}>{formattedScore}</Text>
-      {podiumWithYouURI && (
-        <Image
-          source={{
-            uri: podiumWithYouURI,
-          }}
-          style={styles.podium}
-        />
-      )}
+      <TouchableOpacity onPress={() => setUserResponse('what is bronson?')}>
+        <Text style={styles.score}>{formattedScore}</Text>
+        {podiumWithYouURI && (
+          <Image
+            source={{
+              uri: podiumWithYouURI,
+            }}
+            style={styles.podium}
+          />
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -39,6 +43,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 24,
     marginBottom: -80,
+    marginLeft: 85,
     zIndex: 10,
   },
   podium: {
