@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -28,9 +28,11 @@ import {
 import {localImages} from '../../android/app/assets';
 import Podium from '../components/Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
-import {ChatBubble} from '../components/ChatBubble';
 
-const values = [300, 400, 800];
+import {ChatBubble} from '../components/ChatBubble';
+import ValueBox from '../components/ValueBox';
+
+export const values = [300, 400, 800];
 const {width, height} = Dimensions.get('window');
 
 const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
@@ -57,6 +59,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
   };
 
   const preGameBoardDisplay = true;
+
   return (
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
       <ImageBackground
@@ -87,46 +90,32 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
             ))}
           </View>
         )}
-        {preGameBoardDisplay ? (
-          <View style={styles.valuesContainer}>
-            {values.map((value, valueIndex) => (
-              <View key={value} style={styles.valueRow}>
-                {categories.map((category, categoryIndex) => {
-                  const x = (categoryIndex + 1).toString();
-                  const y = (valueIndex + 1).toString();
+        <View style={styles.valuesContainer}>
+          {values.map((value, valueIndex) => (
+            <View key={value} style={styles.valueRow}>
+              {categories.map((category, categoryIndex) => {
+                const isSelected = selectedQuestions[`${category}-${value}`];
 
-                  const imageURI = boardImageURIs[x][y];
+                const x = (categoryIndex + 1).toString();
+                const y = (valueIndex + 1).toString();
 
-                  return (
-                    <Image
-                      key={`${category}-${value}`}
-                      style={styles.logoSmall}
-                      source={{uri: imageURI}}
-                    />
-                  );
-                })}
-              </View>
-            ))}
-          </View>
-        ) : (
-          <View style={styles.valuesContainer}>
-            {values.map(value => (
-              <View key={value} style={styles.valueRow}>
-                {categories.map(category => (
-                  <TouchableOpacity
+                const imageURI = boardImageURIs[x][y];
+                return (
+                  <ValueBox
+                    isPregameBoard={preGameBoardDisplay}
+                    isTitle={false}
                     key={`${category}-${value}`}
-                    style={styles.valueBox}
-                    onPress={() => handleSelectQuestion(category, value)}
-                    disabled={selectedQuestions[`${category}-${value}`]}>
-                    {!selectedQuestions[`${category}-${value}`] && (
-                      <Text style={styles.valueText}>${value}</Text>
-                    )}
-                  </TouchableOpacity>
-                ))}
-              </View>
-            ))}
-          </View>
-        )}
+                    category={category}
+                    value={value}
+                    isSelected={isSelected}
+                    onSelect={() => handleSelectQuestion(category, value)}
+                    imageURI={imageURI}
+                  />
+                );
+              })}
+            </View>
+          ))}
+        </View>
       </View>
       <View style={styles.podiumContainer}>
         <Podium
