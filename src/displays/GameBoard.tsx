@@ -69,27 +69,22 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
         style={styles.fullscreen}
       />
       <View style={styles.gameBoard}>
-        {preGameBoardDisplay ? (
-          <View style={styles.categoriesContainer}>
-            {categories.map(category => (
-              <Image
-                key={category}
-                style={styles.logoSmall}
-                source={{
-                  uri: jeopardyLogoSmallURI ?? localImages.jeopardyLogoSmall,
-                }}
+        <View style={styles.categoriesContainer}>
+          {categories.map(category => {
+            return (
+              <ValueBox
+                isPregameBoard={preGameBoardDisplay}
+                isTitle={true}
+                key={`${category}`}
+                category={category}
+                value={0}
+                isSelected={false}
+                onSelect={() => ({})}
+                imageURI={jeopardyLogoSmallURI ?? localImages.jeopardyLogoSmall}
               />
-            ))}
-          </View>
-        ) : (
-          <View style={styles.categoriesContainer}>
-            {categories.map(category => (
-              <Text key={category} style={styles.categoryTitle}>
-                {category}
-              </Text>
-            ))}
-          </View>
-        )}
+            );
+          })}
+        </View>
         <View style={styles.valuesContainer}>
           {values.map((value, valueIndex) => (
             <View key={value} style={styles.valueRow}>

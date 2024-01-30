@@ -16,7 +16,6 @@ const ValueBox: React.FC<ValueBoxProps> = ({
   isTitle,
   category,
   value,
-  isSelected,
   onSelect,
   imageURI,
 }) => {
@@ -40,11 +39,19 @@ const ValueBox: React.FC<ValueBoxProps> = ({
     }
   }
   if (!isPregameBoard) {
-    return (
-      <TouchableOpacity onPress={onSelect} style={styles.valueBox}>
-        <Text style={styles.valueText}>${value}</Text>
-      </TouchableOpacity>
-    );
+    if (isTitle) {
+      return (
+        <Text key={`${category}-${value}`} style={styles.categoryTitle}>
+          {category}
+        </Text>
+      );
+    } else {
+      return (
+        <TouchableOpacity onPress={onSelect} style={styles.valueBox}>
+          <Text style={styles.valueText}>${value}</Text>
+        </TouchableOpacity>
+      );
+    }
   }
 };
 
