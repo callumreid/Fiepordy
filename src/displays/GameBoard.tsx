@@ -27,6 +27,7 @@ import {
 import {localImages} from '../../android/app/assets';
 import Podium from '../components/Podium';
 import Animated, {FadeOut} from 'react-native-reanimated';
+import {ChatBubble} from '../components/ChatBubble';
 
 const values = [300, 400, 800];
 const {width, height} = Dimensions.get('window');
@@ -128,6 +129,11 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
       <View style={styles.podiumContainer}>
         <Podium name="You" score={score} isCurrentUser={true} />
       </View>
+      <View style={styles.chatBubbleContainer}>
+        <ChatBubble>
+          <Text style={styles.chatBubbleText}>I'm a cute chat bubble 😊</Text>
+        </ChatBubble>
+      </View>
     </Animated.View>
   );
 };
@@ -203,6 +209,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
+  },
+  chatBubbleContainer: {
+    position: 'absolute',
+    bottom: 150,
+    right: 500,
+    maxWidth: 300,
+  },
+  chatBubbleText: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#000',
   },
 });
 
