@@ -12,11 +12,13 @@ type PodiumProps = {
 
 const Podium: React.FC<PodiumProps> = ({score, setUserResponse}) => {
   const formattedScore = score < 0 ? `-$${Math.abs(score)}` : `$${score}`;
-
+  const scoreColor = score < 0 ? '#FF0000' : '#FFF';
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setUserResponse('what is bronson?')}>
-        <Text style={styles.score}>{formattedScore}</Text>
+        <Text style={[styles.score, {color: scoreColor}]}>
+          {formattedScore}
+        </Text>
         {podiumWithYouURI && (
           <Image
             source={{
