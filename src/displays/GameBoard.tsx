@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 
 import {Scene} from '../types/scenes';
 import {
+  playerNamesAtom,
   pregameGameBoardDisplayAtom,
   sceneAtom,
   scoreAtom,
@@ -16,7 +17,6 @@ import {
   selectedQuestionsAtom,
   selectedValueAtom,
   userResponseAtom,
-  widthAtom,
 } from '../atoms/atoms';
 import {useAtom} from 'jotai';
 import {GameBoardProps} from '../types/props';
@@ -32,6 +32,7 @@ import Animated, {FadeOut} from 'react-native-reanimated';
 import {ChatBubble} from '../components/ChatBubble';
 import ValueBox from '../components/ValueBox';
 import {GAME_BOARD} from '../constants/values';
+import {getRandomName} from '../utils/getRandomName';
 
 const {width, height} = Dimensions.get('window');
 
@@ -48,6 +49,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
   const [pregameGameBoardDisplay, setPregameGameBoardDisplay] = useAtom(
     pregameGameBoardDisplayAtom,
   );
+  const [playerNames, setPlayerNames] = useAtom(playerNamesAtom);
 
   // handlers
   const handleSelectQuestion = (category: string, value: number) => {
@@ -60,6 +62,11 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
     }));
     setScene(Scene.QUESTION);
   };
+
+  // Set testing state:
+  useEffect(() => {
+    setPlayerNames([getRandomName(), 'You', getRandomName()]);
+  }, [setPlayerNames]);
 
   return (
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
@@ -117,7 +124,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
       </View>
       <View style={styles.podiumContainer}>
         <Podium
-          name="You"
+          name={playerNames[0]}
           score={score}
           isCurrentUser={true}
           setUserResponse={setUserResponse}
