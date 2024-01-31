@@ -9,6 +9,8 @@ import {
 
 import {Scene} from '../types/scenes';
 import {
+  opp1ResponseAtom,
+  opp2ResponseAtom,
   playerNamesAtom,
   pregameGameBoardDisplayAtom,
   sceneAtom,
@@ -46,6 +48,9 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
   );
   const [score] = useAtom(scoreAtom);
   const [userResponse, setUserResponse] = useAtom(userResponseAtom);
+  const [opp1Response, setOpp1Response] = useAtom(opp1ResponseAtom);
+  const [opp2Response, setOpp2Response] = useAtom(opp2ResponseAtom);
+
   const [pregameGameBoardDisplay, setPregameGameBoardDisplay] = useAtom(
     pregameGameBoardDisplayAtom,
   );
@@ -65,8 +70,10 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
 
   // Set testing state:
   useEffect(() => {
-    setPlayerNames([getRandomName(), 'You', getRandomName()]);
-  }, [setPlayerNames]);
+    setTimeout(() => {
+      setPregameGameBoardDisplay(false);
+    }, 2000);
+  }, [setPregameGameBoardDisplay]);
 
   return (
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
@@ -122,21 +129,55 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
           ))}
         </View>
       </View>
-      <View style={styles.podiumContainer}>
-        <Podium
-          name={playerNames[0]}
-          score={score}
-          isCurrentUser={true}
-          setUserResponse={setUserResponse}
-        />
-      </View>
-      {userResponse !== '' && (
-        <View style={styles.chatBubbleContainer}>
-          <ChatBubble>
-            <Text style={styles.chatBubbleText}>{userResponse}</Text>
-          </ChatBubble>
+      <View style={styles.podiumsContainer}>
+        <View style={styles.podiumContainer}>
+          <Podium
+            name={playerNames[0]}
+            score={score}
+            isCurrentUser={true}
+            setResponse={setOpp1Response}
+          />
         </View>
-      )}
+        {opp1Response !== '' && (
+          <View style={styles.chatBubbleContainer}>
+            <ChatBubble>
+              <Text style={styles.chatBubbleText}>{opp1Response}</Text>
+            </ChatBubble>
+          </View>
+        )}
+
+        <View style={styles.podiumContainer}>
+          <Podium
+            name={playerNames[1]}
+            score={score}
+            isCurrentUser={true}
+            setResponse={setUserResponse}
+          />
+        </View>
+        {userResponse !== '' && (
+          <View style={styles.chatBubbleContainer}>
+            <ChatBubble>
+              <Text style={styles.chatBubbleText}>{userResponse}</Text>
+            </ChatBubble>
+          </View>
+        )}
+
+        <View style={styles.podiumContainer}>
+          <Podium
+            name={playerNames[2]}
+            score={score}
+            isCurrentUser={true}
+            setResponse={setOpp2Response}
+          />
+        </View>
+        {opp2Response !== '' && (
+          <View style={styles.chatBubbleContainer}>
+            <ChatBubble>
+              <Text style={styles.chatBubbleText}>{opp2Response}</Text>
+            </ChatBubble>
+          </View>
+        )}
+      </View>
     </Animated.View>
   );
 };
@@ -171,19 +212,24 @@ const styles = StyleSheet.create({
   valuesContainer: {
     marginBottom: 100,
   },
-  podiumContainer: {
+  podiumsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'flex-end',
+  },
+  podiumContainer: {
+    flex: 1,
+    maxWidth: 300,
+    alignItems: 'center',
   },
   chatBubbleContainer: {
     position: 'absolute',
     bottom: 150,
-    left: 435,
+    left: 350,
     width: 500,
   },
   chatBubbleText: {

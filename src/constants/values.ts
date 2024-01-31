@@ -3,7 +3,7 @@ export const CATEGORIES = [
   'TV Show',
   'Holidays Around The World',
   '19th Century America',
-] as const;
+];
 
 export const COLORS = {
   WHITE: '#fff',
