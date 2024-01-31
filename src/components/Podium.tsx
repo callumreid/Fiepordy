@@ -40,12 +40,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 5,
   },
-
   score: {
+    position: 'absolute',
+    top: '61%',
+    left: '60%',
+    transform: [{translateX: -50}, {translateY: -50}],
+    textAlign: 'center',
     color: '#FFF',
     fontSize: 24,
-    marginBottom: -80,
-    marginLeft: 85,
     zIndex: 10,
   },
   podium: {
