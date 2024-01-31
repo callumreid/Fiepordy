@@ -9,3 +9,4 @@ export const selectedValueAtom = atom(0);
 export const selectedQuestionsAtom = atom<SelectedQuestionsState>({});
 export const scoreAtom = atom(0);
 export const userResponseAtom = atom('');
+export const pregameGameBoardDisplayAtom = atom(false);

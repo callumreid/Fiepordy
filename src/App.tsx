@@ -1,7 +1,7 @@
 import {useAtom} from 'jotai';
 import {sceneAtom} from './atoms/atoms';
 import Question from './components/Question';
-import {categories} from './constants/values';
+import {CATEGORIES} from './constants/values';
 import Category from './displays/Category';
 import DailyDouble from './displays/DailyDouble';
 import FinalJeopardy from './displays/FinalJeopardy';
@@ -18,11 +18,11 @@ export default function App() {
     <>
       {scene === Scene.SPLASH_SCREEN && <SplashScreen />}
       {scene === Scene.GAME_MODE_SELECTION && <GameModeSelection />}
-      {scene === Scene.GAME_BOARD && <GameBoard categories={categories} />}
+      {scene === Scene.GAME_BOARD && <GameBoard categories={CATEGORIES} />}
       {scene === Scene.QUESTION && <Question />}
       {scene === Scene.FINAL_JEOPARDY && <FinalJeopardy />}
       {scene === Scene.DOUBLE_JEOPARDY && <DailyDouble />}
-      {scene === Scene.CATEGORY && <Category categories={categories} />}
+      {scene === Scene.CATEGORY && <Category categories={CATEGORIES} />}
     </>
   );
 }

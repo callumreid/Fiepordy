@@ -1,22 +1,22 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
   Dimensions,
   ImageBackground,
-  Image,
 } from 'react-native';
 
 import {Scene} from '../types/scenes';
 import {
+  pregameGameBoardDisplayAtom,
   sceneAtom,
   scoreAtom,
   selectedCategoryAtom,
   selectedQuestionsAtom,
   selectedValueAtom,
   userResponseAtom,
+  widthAtom,
 } from '../atoms/atoms';
 import {useAtom} from 'jotai';
 import {GameBoardProps} from '../types/props';
@@ -31,8 +31,8 @@ import Animated, {FadeOut} from 'react-native-reanimated';
 
 import {ChatBubble} from '../components/ChatBubble';
 import ValueBox from '../components/ValueBox';
+import {GAME_BOARD} from '../constants/values';
 
-export const values = [300, 400, 800];
 const {width, height} = Dimensions.get('window');
 
 const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
@@ -45,6 +45,9 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
   );
   const [score] = useAtom(scoreAtom);
   const [userResponse, setUserResponse] = useAtom(userResponseAtom);
+  const [pregameGameBoardDisplay, setPregameGameBoardDisplay] = useAtom(
+    pregameGameBoardDisplayAtom,
+  );
 
   // handlers
   const handleSelectQuestion = (category: string, value: number) => {
@@ -57,8 +60,6 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
     }));
     setScene(Scene.QUESTION);
   };
-
-  const preGameBoardDisplay = false;
 
   return (
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
@@ -73,7 +74,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
           {categories.map(category => {
             return (
               <ValueBox
-                isPregameBoard={preGameBoardDisplay}
+                isPregameBoard={pregameGameBoardDisplay}
                 isTitle={true}
                 key={`${category}`}
                 category={category}
@@ -87,7 +88,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
           })}
         </View>
         <View style={styles.valuesContainer}>
-          {values.map((value, valueIndex) => (
+          {GAME_BOARD.VALUES.map((value, valueIndex) => (
             <View key={value} style={styles.valueRow}>
               {categories.map((category, categoryIndex) => {
                 const isSelected = selectedQuestions[`${category}-${value}`];
@@ -98,7 +99,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
                 const imageURI = boardImageURIs[x][y];
                 return (
                   <ValueBox
-                    isPregameBoard={preGameBoardDisplay}
+                    isPregameBoard={pregameGameBoardDisplay}
                     isTitle={false}
                     key={`${category}-${value}`}
                     category={category}
@@ -132,6 +133,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
     </Animated.View>
   );
 };
+
 const styles = StyleSheet.create({
   fullscreen: {
     flex: 1,
@@ -154,47 +156,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     width: '100%',
   },
-  logoSmall: {
-    flex: 1,
-    paddingVertical: 20,
-    marginHorizontal: 2,
-    width: 85,
-    height: 80,
-  },
-  categoryTitle: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: 'bold',
-    flex: 1,
-    textAlign: 'center',
-    paddingVertical: 20,
-    backgroundColor: '#1b199c',
-    marginHorizontal: 2,
-    width: 85,
-    height: 80,
-  },
-  valuesContainer: {
-    marginBottom: 100,
-  },
   valueRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginBottom: 5,
   },
-  valueBox: {
-    backgroundColor: '#1b199c',
-    paddingVertical: 20,
-    flex: 1,
-    marginHorizontal: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 85,
-    height: 80,
-  },
-  valueText: {
-    color: '#EABD5E',
-    fontSize: 38,
-    fontWeight: 'bold',
+  valuesContainer: {
+    marginBottom: 100,
   },
   podiumContainer: {
     position: 'absolute',

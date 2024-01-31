@@ -1,17 +1,10 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
+import {ValueBoxProps} from '../types/props';
 
-type ValueBoxProps = {
-  isPregameBoard: boolean;
-  isTitle: boolean;
-  category: string;
-  value: number;
-  isSelected: boolean;
-  onSelect: () => void;
-  imageURI: string;
-  disabled: boolean;
-};
-
+/**
+ * ValueBox components are the "tiles" of the game board. They can be provided with config to render as either category title, value, or image for pregame board display. Values are disabled once selected.
+ */
 const ValueBox: React.FC<ValueBoxProps> = ({
   isPregameBoard,
   isTitle,
@@ -61,12 +54,6 @@ const ValueBox: React.FC<ValueBoxProps> = ({
 };
 
 const styles = StyleSheet.create({
-  categoriesContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 5,
-    width: '100%',
-  },
   logoSmall: {
     flex: 1,
     paddingVertical: 20,
@@ -86,14 +73,7 @@ const styles = StyleSheet.create({
     width: 85,
     height: 80,
   },
-  valuesContainer: {
-    marginBottom: 100,
-  },
-  valueRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 5,
-  },
+
   valueBox: {
     backgroundColor: '#1b199c',
     paddingVertical: 20,

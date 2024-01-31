@@ -22,7 +22,7 @@ const GameModeSelection = () => {
   const [_lastEventType, setLastEventType] = React.useState('');
 
   const myTVEventHandler = (evt: any) => {
-    console.log('evt');
+    console.log('evt:', evt);
     setLastEventType(evt.eventType);
   };
 
@@ -42,7 +42,13 @@ const GameModeSelection = () => {
           )}
 
           <TouchableOpacity style={styles.button} onPress={() => {}}>
-            <Text style={styles.buttonText}>Play {_lastEventType}</Text>
+            <Text
+              style={styles.buttonText}
+              onPress={() => {
+                setScene(Scene.GAME_BOARD);
+              }}>
+              Play{' '}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
