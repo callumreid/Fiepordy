@@ -13,3 +13,21 @@ export type DailyDoubleProps = {
 export type FinalJeopardyProps = {
   //todo
 };
+
+export type PodiumProps = {
+  setUserResponse: any;
+  name: string;
+  score: number;
+  isCurrentUser?: boolean;
+};
+
+export type ValueBoxProps = {
+  isPregameBoard: boolean;
+  isTitle: boolean;
+  category: string;
+  value: number;
+  isSelected: boolean;
+  onSelect: () => void;
+  imageURI: string;
+  disabled: boolean;
+};

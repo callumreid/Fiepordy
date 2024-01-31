@@ -1,22 +1,18 @@
-// components/Podium.tsx
 import React from 'react';
 import {View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {podiumWithYouURI} from '../constants/visualAssets';
-
-type PodiumProps = {
-  setUserResponse: any;
-  name: string;
-  score: number;
-  isCurrentUser?: boolean;
-};
+import {PodiumProps} from '../types/props';
+import {COLORS} from '../constants/values';
 
 const Podium: React.FC<PodiumProps> = ({score, setUserResponse}) => {
   const formattedScore = score < 0 ? `-$${Math.abs(score)}` : `$${score}`;
-  const scoreColor = score < 0 ? '#FF0000' : '#FFF';
+  const scoreColor = score < 0 ? COLORS.RED : COLORS.WHITE;
+  const scorePosition = calculateScorePosition(formattedScore);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setUserResponse('what is bronson?')}>
-        <Text style={[styles.score, {color: scoreColor}]}>
+        <Text style={[styles.score, {color: scoreColor, left: scorePosition}]}>
           {formattedScore}
         </Text>
         {podiumWithYouURI && (
@@ -43,7 +39,6 @@ const styles = StyleSheet.create({
   score: {
     position: 'absolute',
     top: '61%',
-    left: '60%',
     transform: [{translateX: -50}, {translateY: -50}],
     textAlign: 'center',
     color: '#FFF',
@@ -59,3 +54,14 @@ const styles = StyleSheet.create({
 });
 
 export default Podium;
+
+/**
+ * Uses length of score text string and adjustment factor to keep score text centered on podium
+ */
+const calculateScorePosition = (scoreText: string) => {
+  const basePosition = 144;
+  const adjustmentFactor = 4.9;
+  const adjustment = scoreText.length * adjustmentFactor;
+
+  return basePosition - adjustment;
+};
