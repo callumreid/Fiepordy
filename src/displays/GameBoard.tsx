@@ -58,7 +58,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
     setScene(Scene.QUESTION);
   };
 
-  const preGameBoardDisplay = true;
+  const preGameBoardDisplay = false;
 
   return (
     <Animated.View style={styles.container} exiting={FadeOut.duration(500)}>
@@ -81,6 +81,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
                 isSelected={false}
                 onSelect={() => ({})}
                 imageURI={jeopardyLogoSmallURI ?? localImages.jeopardyLogoSmall}
+                disabled={false}
               />
             );
           })}
@@ -105,6 +106,7 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
                     isSelected={isSelected}
                     onSelect={() => handleSelectQuestion(category, value)}
                     imageURI={imageURI}
+                    disabled={selectedQuestions[`${category}-${value}`]}
                   />
                 );
               })}

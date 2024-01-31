@@ -9,6 +9,7 @@ type ValueBoxProps = {
   isSelected: boolean;
   onSelect: () => void;
   imageURI: string;
+  disabled: boolean;
 };
 
 const ValueBox: React.FC<ValueBoxProps> = ({
@@ -18,6 +19,7 @@ const ValueBox: React.FC<ValueBoxProps> = ({
   value,
   onSelect,
   imageURI,
+  disabled,
 }) => {
   if (isPregameBoard) {
     if (isTitle) {
@@ -47,8 +49,11 @@ const ValueBox: React.FC<ValueBoxProps> = ({
       );
     } else {
       return (
-        <TouchableOpacity onPress={onSelect} style={styles.valueBox}>
-          <Text style={styles.valueText}>${value}</Text>
+        <TouchableOpacity
+          onPress={onSelect}
+          style={styles.valueBox}
+          disabled={disabled}>
+          {!disabled && <Text style={styles.valueText}>${value}</Text>}
         </TouchableOpacity>
       );
     }
