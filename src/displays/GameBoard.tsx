@@ -9,12 +9,13 @@ import {
 
 import {Scene} from '../types/scenes';
 import {
+  currentPlayerIndexAtom,
   opp1ResponseAtom,
   opp2ResponseAtom,
   playerNamesAtom,
   pregameGameBoardDisplayAtom,
   sceneAtom,
-  scoreAtom,
+  scoresAtom,
   selectedCategoryAtom,
   selectedQuestionsAtom,
   selectedValueAtom,
@@ -34,7 +35,6 @@ import Animated, {FadeOut} from 'react-native-reanimated';
 import {ChatBubble} from '../components/ChatBubble';
 import ValueBox from '../components/ValueBox';
 import {GAME_BOARD} from '../constants/values';
-import {getRandomName} from '../utils/getRandomName';
 
 const {width, height} = Dimensions.get('window');
 
@@ -46,11 +46,13 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
   const [selectedQuestions, setSelectedQuestions] = useAtom(
     selectedQuestionsAtom,
   );
-  const [score] = useAtom(scoreAtom);
+  const [scores, setScores] = useAtom(scoresAtom);
   const [userResponse, setUserResponse] = useAtom(userResponseAtom);
   const [opp1Response, setOpp1Response] = useAtom(opp1ResponseAtom);
   const [opp2Response, setOpp2Response] = useAtom(opp2ResponseAtom);
-
+  const [currentPlayerIndex, setCurrentPlayerIndex] = useAtom(
+    currentPlayerIndexAtom,
+  );
   const [pregameGameBoardDisplay, setPregameGameBoardDisplay] = useAtom(
     pregameGameBoardDisplayAtom,
   );
@@ -133,8 +135,8 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
         <View style={styles.podiumContainer}>
           <Podium
             name={playerNames[0]}
-            score={score}
-            isCurrentUser={true}
+            score={scores[0]}
+            isCurrentUser={currentPlayerIndex === 0}
             setResponse={setOpp1Response}
           />
         </View>
@@ -149,8 +151,8 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
         <View style={styles.podiumContainer}>
           <Podium
             name={playerNames[1]}
-            score={score}
-            isCurrentUser={true}
+            score={scores[1]}
+            isCurrentUser={currentPlayerIndex === 1}
             setResponse={setUserResponse}
           />
         </View>
@@ -165,8 +167,8 @@ const GameBoard: React.FC<GameBoardProps> = ({categories}) => {
         <View style={styles.podiumContainer}>
           <Podium
             name={playerNames[2]}
-            score={score}
-            isCurrentUser={true}
+            score={scores[2]}
+            isCurrentUser={currentPlayerIndex === 2}
             setResponse={setOpp2Response}
           />
         </View>

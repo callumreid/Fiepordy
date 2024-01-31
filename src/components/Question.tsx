@@ -2,8 +2,9 @@ import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Animated, {FadeOut} from 'react-native-reanimated';
 import {
+  currentPlayerIndexAtom,
   sceneAtom,
-  scoreAtom,
+  scoresAtom,
   selectedCategoryAtom,
   selectedValueAtom,
 } from '../atoms/atoms';
@@ -14,18 +15,32 @@ const Question = () => {
   const [, setScene] = useAtom(sceneAtom);
   const [selectedCategory] = useAtom(selectedCategoryAtom);
   const [selectedValue] = useAtom(selectedValueAtom);
-  const [score, setScore] = useAtom(scoreAtom);
+  const [scores, setScores] = useAtom(scoresAtom);
+
+  const [currentPlayerIndex, setCurrentPlayerIndex] = useAtom(
+    currentPlayerIndexAtom,
+  );
 
   const handleCorrectAnswer = (value: number) => {
-    const newScore = score + value;
+    const newScore = scores[currentPlayerIndex] + value;
     console.log(`New score: ${newScore}`);
-    setScore(newScore);
+
+    setScores(currentScores => {
+      const newScores = [...currentScores];
+      newScores[currentPlayerIndex] = newScore;
+      return newScores;
+    });
   };
 
   const handleIncorrectAnswer = (value: number) => {
-    const newScore = score - value;
+    const newScore = scores[currentPlayerIndex] - value;
     console.log(`New score: ${newScore}`);
-    setScore(newScore);
+
+    setScores(currentScores => {
+      const newScores = [...currentScores];
+      newScores[currentPlayerIndex] = newScore;
+      return newScores;
+    });
   };
 
   const handleQuestionAnswered = (isCorrect: boolean, value: number) => {
@@ -35,6 +50,14 @@ const Question = () => {
     } else {
       handleIncorrectAnswer(value);
     }
+
+    setCurrentPlayerIndex(prevIndex => {
+      if (prevIndex === 2) {
+        return 0;
+      } else {
+        return prevIndex + 1;
+      }
+    });
 
     setScene(Scene.GAME_BOARD);
   };
