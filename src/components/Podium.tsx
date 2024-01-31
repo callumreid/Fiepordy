@@ -4,14 +4,14 @@ import {podiumWithYouURI} from '../constants/visualAssets';
 import {PodiumProps} from '../types/props';
 import {COLORS} from '../constants/values';
 
-const Podium: React.FC<PodiumProps> = ({score, setUserResponse, name}) => {
+const Podium: React.FC<PodiumProps> = ({score, setResponse, name}) => {
   const formattedScore = score < 0 ? `-$${Math.abs(score)}` : `$${score}`;
   const scoreColor = score < 0 ? COLORS.RED : COLORS.WHITE;
   const scorePosition = calculateScorePosition(formattedScore);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setUserResponse('what is bronson?')}>
+      <TouchableOpacity onPress={() => setResponse('what is bronson?')}>
         <Text style={[styles.score, {color: scoreColor, left: scorePosition}]}>
           {formattedScore}
         </Text>

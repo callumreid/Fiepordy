@@ -45,7 +45,7 @@ const GameModeSelection = () => {
             <Text
               style={styles.buttonText}
               onPress={() => {
-                setScene(Scene.GAME_BOARD);
+                setScene(Scene.CATEGORY);
               }}>
               Play{' '}
             </Text>
@@ -53,7 +53,7 @@ const GameModeSelection = () => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setScene(Scene.GAME_BOARD);
+              setScene(Scene.CATEGORY);
             }}>
             <Text style={styles.buttonText}>Practice</Text>
           </TouchableOpacity>

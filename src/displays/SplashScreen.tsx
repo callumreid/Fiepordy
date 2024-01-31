@@ -1,11 +1,5 @@
-import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-  Image,
-} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, StyleSheet, Dimensions, Image} from 'react-native';
 import {sceneAtom} from '../atoms/atoms';
 import {useAtom} from 'jotai';
 import {Scene} from '../types/scenes';
@@ -16,21 +10,24 @@ const {width, height} = Dimensions.get('window');
 
 const SplashScreen = () => {
   const [, setScene] = useAtom(sceneAtom);
+  useEffect(() => {
+    setTimeout(() => {
+      setScene(Scene.GAME_MODE_SELECTION);
+    }, 2000);
+  }, [setScene]);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setScene(Scene.GAME_MODE_SELECTION)}>
-        <Image
-          source={
-            jeopardyLogoURI
-              ? {
-                  uri: jeopardyLogoURI,
-                }
-              : localImages.jeopardyLogo
-          }
-          style={styles.backgroundImage}
-        />
-      </TouchableOpacity>
+      <Image
+        source={
+          jeopardyLogoURI
+            ? {
+                uri: jeopardyLogoURI,
+              }
+            : localImages.jeopardyLogo
+        }
+        style={styles.backgroundImage}
+      />
     </View>
   );
 };

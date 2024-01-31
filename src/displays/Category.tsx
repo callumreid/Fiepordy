@@ -7,7 +7,7 @@ import {
   Text,
 } from 'react-native';
 import {CategoryProps} from '../types/props';
-import {blueBGURI, jeopardyLogoURI} from '../constants/visualAssets';
+import {blueBGURI} from '../constants/visualAssets';
 import {Scene} from '../types/scenes';
 import {useAtom} from 'jotai';
 import {localImages} from '../../android/app/assets';
@@ -26,7 +26,7 @@ const Category: React.FC<CategoryProps> = ({categories}) => {
     if (showSplash) {
       timer = setTimeout(() => {
         setShowSplash(false);
-      }, 1000);
+      }, 1500);
     } else if (currentCategoryIndex < categories.length) {
       timer = setTimeout(() => {
         setShowSplash(true);
@@ -42,9 +42,7 @@ const Category: React.FC<CategoryProps> = ({categories}) => {
   return showSplash ? (
     <View style={styles.container}>
       <ImageBackground
-        source={
-          jeopardyLogoURI ? {uri: jeopardyLogoURI} : localImages.jeopardyLogo
-        }
+        source={localImages.jeopardyLogo}
         style={styles.backgroundImage}
       />
     </View>

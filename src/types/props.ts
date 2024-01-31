@@ -15,7 +15,7 @@ export type FinalJeopardyProps = {
 };
 
 export type PodiumProps = {
-  setUserResponse: any;
+  setResponse: any;
   name: string;
   score: number;
   isCurrentUser?: boolean;
