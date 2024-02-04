@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
   View,
   ImageBackground,
@@ -13,10 +13,14 @@ import {useAtom} from 'jotai';
 import {Scene} from '../types/scenes';
 import {jeopardyTitleTextURI} from '../constants/visualAssets';
 import {useTVEventHandler} from 'react-native';
+import {Socket, io} from 'socket.io-client';
+import {SocketContext} from '../context/SocketContext';
 
 const {width, height} = Dimensions.get('window');
 
 const GameModeSelection = () => {
+  const {init} = useContext(SocketContext);
+
   const [, setScene] = useAtom(sceneAtom);
   const [_lastEventType, setLastEventType] = React.useState('');
 
@@ -26,6 +30,10 @@ const GameModeSelection = () => {
   };
 
   useTVEventHandler(myTVEventHandler);
+
+  useEffect(() => {
+    init();
+  }, [init]);
 
   return (
     <ImageBackground

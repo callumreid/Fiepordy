@@ -9,6 +9,7 @@ import GameModeSelection from './displays/GameModeSelection';
 import SplashScreen from './displays/SplashScreen';
 import DailyDouble from './displays/DailyDouble';
 import Category from './displays/Category';
+import {SocketContextWrapper} from './context/SocketContextWrapper';
 
 export default function App() {
   const [scene] = useAtom(sceneAtom);
@@ -19,7 +20,7 @@ export default function App() {
     '19th Century America',
   ];
   return (
-    <>
+    <SocketContextWrapper>
       {scene === Scene.SPLASH_SCREEN && <SplashScreen />}
       {scene === Scene.GAME_MODE_SELECTION && <GameModeSelection />}
       {scene === Scene.GAME_BOARD && <GameBoard categories={categories} />}
@@ -27,6 +28,6 @@ export default function App() {
       {scene === Scene.FINAL_JEOPARDY && <FinalJeopardy />}
       {scene === Scene.DOUBLE_JEOPARDY && <DailyDouble />}
       {scene === Scene.CATEGORY && <Category categories={categories} />}
-    </>
+    </SocketContextWrapper>
   );
 }
