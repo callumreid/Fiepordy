@@ -34,6 +34,7 @@ export const SocketContextWrapper = ({
   const getWebSocketURL = () => {
     // const hostname = window.location.hostname;
 
+    // TODO: Modify this ip before connecting to server
     return 'http://192.168.1.209:4003';
   };
 
